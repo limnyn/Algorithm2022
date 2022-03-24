@@ -1,0 +1,27 @@
+# 다음은 출발점(0,0)으로부터 출구 (N-1, N-1)까지 도달하는 가장 긴 경로의 길이를 구하여 반환하는 함수이다.
+# 경로가 존재하지 않으면 -1을 반환한다.
+# 미로에서 통로는 0, 벽은 1이라고 가정한다.
+# 맨 처음 이 함수는 MazePath(0,0,0)으로 호출된다. 완성하라.
+
+
+N = 3
+maze = [[0,1,1],
+        [0,1,1],
+        [0,0,0]]
+        
+
+def mazePath(x,y,len):
+    if(x<0 or y<0 or x>= N or y>=N or maze[x][y] != 0):
+        return 0
+    elif (x == N-1 and y == N-1):
+        return len
+    else:
+        maze[x][y]=2
+        mazePath(x+1,y,len+1)
+        mazePath(x,y+1,len+1)
+        mazePath(x-1,y,len+1)
+        mazePath(x,y-1,len+1)
+    
+    
+print(mazePath(0,0,0))
+
