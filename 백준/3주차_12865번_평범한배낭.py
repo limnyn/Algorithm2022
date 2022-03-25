@@ -61,7 +61,6 @@ def powerSet(k):
 
 powerSet(0)
 print(priceMax)
-inlaptop
 
 
 # ################## 해결은 가능하나 계산 수가 많아 비효율적##################
