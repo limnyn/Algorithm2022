@@ -30,39 +30,29 @@
 # 예제 출력 1 
 # 14
 
-itemNum, maxWage = map(int, input().split())
+
 itemList = []
+itemNum, maxWage = map(int, input().split())
 for _ in range(itemNum):
     itemList.append(list(map(int,(input().split()))))
-include =[]
-for _ in range(itemNum):include.append(0)
-tuple(include)
+
 tuple(itemList)
-priceMax = 0 # 제일 처음 값을 가치의 최대값으로 지정한다
 
 
-
-def powerSet(k):
-    global priceMax
-    sumofPrice = 0
-    wage = 0
-    if(k==itemNum):#멱집합 하나가 생성되면
-        for i in range(itemNum):
-            if(include[i]):
-                sumofPrice += itemList[i][1]
-                wage += itemList[i][0]
-        if(wage<=maxWage and sumofPrice>=priceMax):     # 조건문= 물품들의 멱집합 중에 무게가 maxWage를 초과하지 않고 가치의 최댓값이면 출력한다.
-            priceMax = sumofPrice
-        return
-    include[k]= 0
-    powerSet(k+1)
-    include[k]=1
-    powerSet(k+1)
-
-powerSet(0)
-print(priceMax)
+def knapsack(wage, item):
+    dp = [[0 for x in range(wage+1)] for x in range(item+1)]
+    for i in range(item+1):
+         for w in range(wage+1):
+            if i==0 or w==0:
+                dp[i][w] = 0
+            elif itemList[i-1][0] <= w:
+                dp[i][w] = max(itemList[i-1][1]+dp[i-1][w-itemList[i-1][0]],dp[i-1][w])
+            else:
+                dp[i][w] = dp[i-1][w]
+    return dp[item][wage]
 
 
+print(knapsack(maxWage,itemNum))
 # ################## 해결은 가능하나 계산 수가 많아 비효율적##################
 # itemNum, maxWage = map(int, input().split())
 # itemList = []
