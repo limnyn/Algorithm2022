@@ -53,7 +53,10 @@ def knapsack(wage, item):
 
 
 print(knapsack(maxWage,itemNum))
-# ################## 해결은 가능하나 계산 수가 많아 비효율적##################
+
+
+
+# ################## 해결은 가능하나 계산 수가 많아 비효율적################## Brute force
 # itemNum, maxWage = map(int, input().split())
 # itemList = []
 # for _ in range(itemNum):
