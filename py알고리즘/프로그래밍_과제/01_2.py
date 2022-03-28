@@ -29,25 +29,39 @@ dx = [-1,1,0,0]
 dy = [0,0,-1,1]
 
 
-def findPath(x,y):
-    if(x < 0 or x >= n or y < 0 or y >= n or maplist[x][y] != 0):
+def findPath(x,y,life):
+    if(x < 0 or x >= n or y < 0 or y >= n or maplist[x][y] == 1 or maplist[x][y]==3 or maplist[x][y] == 4):
         return False
-    elif(x == n-1 and y == n-1):
+
+    elif(x == n-1 and y == n-1): # 목적지 도달시 출구지점 3 표시
         maplist[x][y] = 3
         return True
     else:
-        maplist[x][y] = 3
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            if findPath(nx,ny):
-                return True
+        # 폭탄칸에 도달할때
+        if(maplist[x][y] == 2):
+            if(life-1 < 0):
+                return False
+            else:
+                maplist[x][y] = 3
+                for i in range(4):
+                    nx = x + dx[i]
+                    ny = y + dy[i]
+                    if findPath(nx,ny,life-1):
+                        return True
+        # 폭탄칸이 아닐때
+        else:
+            maplist[x][y] = 3
+            for i in range(4):
+                nx = x + dx[i]
+                ny = y + dy[i]
+                if findPath(nx,ny,life):
+                    return True
         maplist[x][y] = 2
         return False
     
-findPath(0,0)
+findPath(0,0,k)
 if(maplist[n-1][n-1] == 3):
-    print('yes')
+    print('Yes')
 else:
-    print('no')
+    print('No')
 
