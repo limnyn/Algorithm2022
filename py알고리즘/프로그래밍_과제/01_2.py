@@ -14,7 +14,7 @@
 # 1 == 벽
 # 2 == 폭탄
 # 3 == 방문한적있는곳
-
+# 4 == 방문했고 출구까지의 경로상에 있지않음
 
 
 n = int(input())
@@ -43,13 +43,11 @@ def findPath(x,y):
             if findPath(nx,ny):
                 return True
         maplist[x][y] = 2
-        return True
+        return False
     
 findPath(0,0)
 if(maplist[n-1][n-1] == 3):
     print('yes')
 else:
     print('no')
-
-
 
