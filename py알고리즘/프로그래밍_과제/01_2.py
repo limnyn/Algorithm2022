@@ -17,18 +17,18 @@
 # 4 == 방문했고 출구까지의 경로상에 있지않음
 
 
-n = int(input())
 
+# 입력부분
+n = int(input())
 maplist = []
 for _ in range(n):
     maplist.append(list(map(int, input().split())))
-
 k = int(input())
 
 dx = [-1,1,0,0]
 dy = [0,0,-1,1]
 
-
+# 계산부분
 def findPath(x,y,life):
     if(x < 0 or x >= n or y < 0 or y >= n or maplist[x][y] == 1 or maplist[x][y]==3 or maplist[x][y] == 4):
         return False
@@ -58,7 +58,9 @@ def findPath(x,y,life):
                     return True
         maplist[x][y] = 2
         return False
-    
+
+
+# 출력부분
 findPath(0,0,k)
 if(maplist[n-1][n-1] == 3):
     print('Yes')
