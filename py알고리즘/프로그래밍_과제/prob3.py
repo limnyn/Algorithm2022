@@ -8,22 +8,12 @@
 
 
 
-
-# 0 == 통로
-# 1 == 벽
-# 2 == 폭탄
-# 3 == 방문한적있는곳
-# 4 == 방문했고 출구까지의 경로상에 있지않음
-
-# n = int(input())
-# maplist = []
-# for _ in range(n):
-#     maplist.append(list(map(int, input().split())))
-# k = int(input())
-
+# 입력에#########################################
 
 # N=4
 # maze=[[0,0,0,0],[0,0,0,1],[0,0,0,0],[0,1,0,0]]
+##출력 = No path
+
 
 # N = 5
 # maze = [[0,0,0,0,0],
@@ -31,10 +21,16 @@
 #         [0,0,1,0,0],
 #         [0,0,0,0,1],
 #         [1,0,1,0,0]]
+##출력 = 4
+
+
 # N = 3
 # maze = [[0,0,1],
 #         [0,0,0],
 #         [0,1,0]]
+##출력 = 4
+
+
 # N=8
 # maze = [[0,0,1,0,0,0,0,0],
 #         [0,0,1,1,1,0,0,0],
@@ -44,51 +40,59 @@
 #         [0,0,0,0,0,0,0,0],
 #         [0,1,0,0,0,1,0,0],
 #         [0,0,1,1,1,0,0,0]]
+# #출력 = 8
 
-N = int(input())
+
+
+
+
+#입력부분#######
+n = int(input())
 maze = []
-for _ in range(N):
+for _ in range(n):
     maze.append(list(map(int, input().split())))
+
+
+#방향
 dx = [1,0,-1,0]
 dy = [0,1,0,-1]
+stoplist =  []      #도착시 정지횟수 기록
 
 
-stoplist =  []
 
-
-def DFS(x, y,len,d):
-    if x==N-1 and y==N-1:
-        stoplist.append(len+1)
+def DFS(x, y,stopCount,d):
+    if x==n-1 and y==n-1:
+        stoplist.append(stopCount+1)    #도착점도 포함해서 카운트
 
     else:
-        nx = x+dx[d]    #진행방향의 다음 칸의 좌표
+        nx = x+dx[d]    #진행방향의 다음 칸의 좌표 nextX nextY
         ny = y+dy[d]
-        if 0<=nx<N and 0<=ny<N and maze[ny][nx]==0:
+        if 0<=nx<n and 0<=ny<n and maze[ny][nx]==0: #다음칸이 벽과 테두리가 아닐때
             xx=nx
             yy=ny
             maze[yy][xx]=1
-            DFS(xx, yy,len,d)
+            DFS(xx, yy,stopCount,d)                 #진행방향 유지후 재귀
             maze[yy][xx]=0
-        # 조건세분화 필요, 벽일때 
-        elif nx < 0 or ny < 0 or ny >= N or nx >= N or maze[ny][nx] == 1:
+        elif nx < 0 or ny < 0 or ny >= n or nx >= n or maze[ny][nx] == 1:
             for i in range(2):
-                d = (d + i + 1)%4
+                d = (d + i + 1)%4                   # 충돌시 가로축진행->세로축 진행, 세로축진행-> 가로축진행으로 방향전환
                 xx=x+dx[d]
                 yy=y+dy[d]
-                if 0<=xx<N and 0<=yy<N and maze[yy][xx]==0:
+                if 0<=xx<n and 0<=yy<n and maze[yy][xx]==0:
                     maze[yy][xx]=1
-                    DFS(xx, yy,len+1,d)
+                    DFS(xx, yy,stopCount+1,d)       #진행방향 변환, 정지횟수 +1후 재귀
                     maze[yy][xx]=0
                 else:
                     continue
 
 
+#미로시작시 테두리를 제외한 오른쪽, 아래쪽 방향으로만 시작
 DFS(0,0,0,0)
 DFS(0,0,0,1)
     
-if(len(stoplist)==0):
+if(len(stoplist)==0):       #목적지 도달한 기록이 없을때
     print('No path')
-else:
+else:                       #목적지 도달 시 최소 정지횟수 출력
     print(min(stoplist))
 
 
@@ -109,10 +113,10 @@ else:
 
 # cnt = 0
 
-# def DFS(x, y,len):
+# def DFS(x, y,stopCount):
 #     global cnt
 #     if x==N-1 and y==N-1:
-#         stoplist.append(len)
+#         stoplist.append(stopCount)
 #         cnt+=1
 
 #     else:
@@ -121,7 +125,7 @@ else:
 #             yy=y+dy[i]
 #             if 0<=xx<N and 0<=yy<N and maze[yy][xx]==0:
 #                 maze[yy][xx]=1
-#                 DFS(xx, yy,len+1)
+#                 DFS(xx, yy,stopCount+1)
 #                 maze[yy][xx]=0
 
                 
