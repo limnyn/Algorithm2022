@@ -9,18 +9,26 @@ maze = [[0,1,1],
         [0,1,1],
         [0,0,0]]
         
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
 
 def mazePath(x,y,len):
     if(x<0 or y<0 or x>= N or y>=N or maze[x][y] != 0):
-        return 0
+        return -1
     elif (x == N-1 and y == N-1):
         return len
     else:
         maze[x][y]=2
-        mazePath(x+1,y,len+1)
-        mazePath(x,y+1,len+1)
-        mazePath(x-1,y,len+1)
-        mazePath(x,y-1,len+1)
+        max_len = -1
+        for i in range(4):
+            tmp = mazePath(x+dx[i],y+dy[i],len+1)
+            if(tmp > max_len):
+                max_len = tmp
+            
+        maze[x][y] = 0
+
+        return max_len
+
     
     
 print(mazePath(0,0,0))

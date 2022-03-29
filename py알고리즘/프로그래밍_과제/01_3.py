@@ -7,48 +7,127 @@
 # 경로가 존재하지 않으면 “No path”라고 출력한다.
 
 
-n = int(input())
 
-maplist = []
-for _ in range(n):
-    maplist.append(list(map(int, input().split())))
 
-dx = [-1,1,0,0]
-dy = [0,0,-1,1]
+# 0 == 통로
+# 1 == 벽
+# 2 == 폭탄
+# 3 == 방문한적있는곳
+# 4 == 방문했고 출구까지의 경로상에 있지않음
 
-from collections import deque
+# n = int(input())
+# maplist = []
+# for _ in range(n):
+#     maplist.append(list(map(int, input().split())))
+# k = int(input())
 
-for i in range(n):
-    for j in range(n):
-        if maplist[i][j] == 1:
-            maplist[i][j] = 0
-        elif maplist[i][j] == 0:
-            maplist[i][j] = 1
+
+# N=4
+# maze=[[0,0,0,0],[0,0,0,1],[0,0,0,0],[0,1,0,0]]
+
+# N = 5
+# maze = [[0,0,0,0,0],
+#         [0,1,0,1,0],
+#         [0,0,1,0,0],
+#         [0,0,0,0,1],
+#         [1,0,1,0,0]]
+# N = 3
+# maze = [[0,0,1],
+#         [0,0,0],
+#         [0,1,0]]
+# N=8
+# maze = [[0,0,1,0,0,0,0,0],
+#         [0,0,1,1,1,0,0,0],
+#         [0,0,0,0,1,0,1,0],
+#         [0,0,0,0,1,0,0,1],
+#         [0,1,1,0,1,0,0,0],
+#         [0,0,0,0,0,0,0,0],
+#         [0,1,0,0,0,1,0,0],
+#         [0,0,1,1,1,0,0,0]]
+
+N = int(input())
+maze = []
+for _ in range(N):
+    maze.append(list(map(int, input().split())))
+dx = [1,0,-1,0]
+dy = [0,1,0,-1]
+
+
+stoplist =  []
+
+
+def DFS(x, y,len,d):
+    if x==N-1 and y==N-1:
+        stoplist.append(len+1)
+
+    else:
+        nx = x+dx[d]    #진행방향의 다음 칸의 좌표
+        ny = y+dy[d]
+        if 0<=nx<N and 0<=ny<N and maze[ny][nx]==0:
+            xx=nx
+            yy=ny
+            maze[yy][xx]=1
+            DFS(xx, yy,len,d)
+            maze[yy][xx]=0
+        # 조건세분화 필요, 벽일때 
+        elif nx < 0 or ny < 0 or ny >= N or nx >= N or maze[ny][nx] == 1:
+            for i in range(2):
+                d = (d + i + 1)%4
+                xx=x+dx[d]
+                yy=y+dy[d]
+                if 0<=xx<N and 0<=yy<N and maze[yy][xx]==0:
+                    maze[yy][xx]=1
+                    DFS(xx, yy,len+1,d)
+                    maze[yy][xx]=0
+                else:
+                    continue
+
+
+DFS(0,0,0,0)
+DFS(0,0,0,1)
     
-def bfs(x,y):
-    # queue 구현을 위해 deque 라이브러리 사용
-    queue = deque()
-    queue.append((x,y))
-    # 큐가 빌 때까지 반복
-    while queue:
-        x, y = queue.popleft()
-        # 현재 위치에서 네 방향으로의 위치 확인
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            # 미로찾기 공간을 벗어난 경우 무시
-            if nx < 0 or ny < 0 or nx >= n or ny >= n:
-                continue
-            # 벽인 경우 무시
-            if maplist[nx][ny] == 0:
-                continue
-            # 해당 노드를 처음 방문하는 경우에만 최단 거리 기록
-            if maplist[nx][ny] == 1:
-                maplist[nx][ny] = maplist[x][y] + 1
-                queue.append((nx,ny))
-            # 가장 오른쪽 아래까지의 최단 거리 반환
-    return maplist[n-1][n-1]
+if(len(stoplist)==0):
+    print('No path')
+else:
+    print(min(stoplist))
 
-print(bfs(0,0))
 
+
+
+
+# ###
+# N = 3
+# maze = [[0,0,1],
+#         [0,0,0],
+#         [0,1,0]]
+        
+# dx = [1,0,-1,0]
+# dy = [0,1,0,-1]
+
+
+# stoplist =  []
+
+# cnt = 0
+
+# def DFS(x, y,len):
+#     global cnt
+#     if x==N-1 and y==N-1:
+#         stoplist.append(len)
+#         cnt+=1
+
+#     else:
+#         for i in range(4):
+#             xx=x+dx[i]
+#             yy=y+dy[i]
+#             if 0<=xx<N and 0<=yy<N and maze[yy][xx]==0:
+#                 maze[yy][xx]=1
+#                 DFS(xx, yy,len+1)
+#                 maze[yy][xx]=0
+
+                
+# DFS(0,0,0)
+# print(cnt)
+    
+    
+# print(stoplist)
 
