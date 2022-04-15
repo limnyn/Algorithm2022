@@ -1,7 +1,7 @@
 /**
  * HW
  */
-public class HW {
+public class poker {
     
 
 public static void main(String[] args) {
