@@ -149,7 +149,6 @@ def partition_medianOfThree(arr,p,r):
     arr[i+1], arr[r] = arr[r], arr[i+1]
     return i+1  #arr[r]이 자리한 위치 반환
 
-
 # #Quick Sort 파이썬버전 간결한 버전, 
 # def quick_Sort(array):
 #     if len(array) <= 1:
@@ -199,34 +198,113 @@ def partition_medianOfThree(arr,p,r):
 
 
 
-###heapsort 최대힙, 재귀x구현
-def heap_sort(a):
-    for i in range(1,len(a)): # 최대 힙 만들기
+
+#재귀 heap_r
+def max_heapify_r(arr, i,lastindex):   #노드 i를 루트로 하는 서비트리를 heapify한다, 루트 i == 0
+    i+=1
+    if i*2-1 > lastindex:
+        i-=1
+        return
+    left=i*2-1
+    right=i*2
+    if (right > lastindex or arr[left]>=arr[right]):
+        k = left
+    else:
+        k = right
+    i-=1
+    if arr[i] >= arr[k]:
+        return
+    arr[i], arr[k] = arr[k], arr[i]
+    max_heapify_r(arr,k,lastindex)
+
+def build_max_heap_r(arr, i):           #배열 힙으로 만들시 arr,0, i를 루트로하는 서브트리 힙으로 만듬
+    lastindex = len(arr)-1
+    for i in range(len(arr)//2 -1,-1,-1):
+        max_heapify_r(arr,i,lastindex)
+        
+def heapsort_r(arr):
+    build_max_heap_r(arr,0)
+    lastindex=len(arr)-1
+    for i in range(len(arr)-1, 0, -1):
+        arr[0], arr[i] = arr[i], arr[0]
+        lastindex-=1
+        max_heapify_r(arr,0,lastindex)
+        
+def heap_insert_r(arr,key):    #힙 arr에 값 삽입 #시간복잡도 O(log2 N)
+    arr.append(key)         
+    i = len(arr)-1  #insert된 인덱스
+    p_Index=((i+1)//2)-1 #부모인덱스
+    while(i>0 and arr[p_Index]<arr[i]):     #i가 root가 아니고 부모보다 큰동안
+        arr[i], arr[p_Index] = arr[p_Index], arr[i]
+        i = p_Index
+        p_Index=((i+1)//2)-1                #다음부모와 비교
+
+def heap_extract_max_r(arr):    #힙에서 최대값 추출 후 힙에서 삭제
+    lastIndex=len(arr)-1
+    if(lastIndex<0):
+        return 'heap underflow!'
+    arr[0], arr[lastIndex] = arr[lastIndex], arr[0]
+    maxNum = arr[lastIndex]
+    del arr[lastIndex]
+    max_heapify_r(arr,0,lastIndex-1)
+    return  maxNum
+
+
+
+###heapsort 최대힙, iter구현
+def build_max_heap(arr):    # 최대 힙 만들기
+    for i in range(1,len(arr)):
         c = i
         while c != 0:
-            r = (c-1) // 2
-            if a[r] < a[c]:
-                a[r], a[c] = a[c], a[r]
-                
+            r = (c-1)//2
+            if arr[r] < arr[c]:
+                arr[r],arr[c] = arr[c],arr[r]
             c = r
 
-    for j in range(len(a)-1,-1,-1): # 힙 만들기
-        a[0], a[j] = a[j], a[0]
+def heap_sort(arr):
+    build_max_heap(arr)     #배열을 받아서 힙으로 넣는다
+    for j in range(len(arr)-1,-1,-1): # 정렬 및 교환
+        arr[0], arr[j] = arr[j], arr[0]
         r = 0
         c = 1
-
+        #재귀X iter 구현
         while c < j:
             c= 2 * r + 1
-            if c < j -1 and a[c] < a[c+1]:
+            if c < j -1 and arr[c] < arr[c+1]:
                 c += 1
                 
-            if c < j and a[r] < a[c]:
-                a[r], a[c]=a[c], a[r]
+            if c < j and arr[r] < arr[c]:
+                arr[r], arr[c]=arr[c], arr[r]
                 
             r = c 
 
-# b = [5, 2, 3, 9, 6, 1, 8, 4, 7]
-# heap_sort(b)
+
+# ###heapsort 최대힙, 재귀x구현
+# def heap_sort(a):
+#     for i in range(1,len(a)): # 최대 힙 만들기
+#         c = i
+#         while c != 0:
+#             r = (c-1) // 2
+#             if a[r] < a[c]:
+#                 a[r], a[c] = a[c], a[r]
+                
+#             c = r
+
+#     for j in range(len(a)-1,-1,-1): # 힙 만들기
+#         a[0], a[j] = a[j], a[0]
+#         r = 0
+#         c = 1
+
+#         while c < j:
+#             c= 2 * r + 1
+#             if c < j -1 and a[c] < a[c+1]:
+#                 c += 1
+                
+#             if c < j and a[r] < a[c]:
+#                 a[r], a[c]=a[c], a[r]
+                
+#             r = c 
+
 
 # #최소힙구현
 # def heapify(li, idx, n):
@@ -259,6 +337,25 @@ def heap_sort(a):
 
 
 
-li = [15,12,2,11,10,6,3,1,8]
-heap_sort(li)
-print(li)
+
+# Counting sort
+def counting_sort(array, max):
+    #counting array 생성
+    counting_array = [0]*(max+1)
+    #counting array에 input array내 원소의 빈도수 담기
+    for i in array:
+        counting_array[i] += 1
+    #counting array 업데이트.
+    for i in range(max):
+        counting_array[i+1] += counting_array[i]
+    #output array 생성
+    output_array = [-1]*len(array)
+    #output array에 정렬하기(counting array를 참조)
+    for i in array:
+        output_array[counting_array[i] -1] = i
+        counting_array[i] -= 1
+    array=output_array[:]
+
+ls=[5,3,4,2,1,1,2,3,4,5]
+counting_sort(ls,5)
+print(ls)
