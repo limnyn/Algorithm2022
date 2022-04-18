@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)https://geonlee.tistory.com/72 -->
+<html lang="ko" class="day view-more-support progress-bar-support page-cover-support fullscreen-page-cover altcover-support alt1 show-info hide-sidebar hide-blog-info sidebar-left sidebar-first theme-color deptheffect gpu effect stickyeffect no-touch goog overflow fixed-sidebar sidebar-reset gh has-pagination original-module-color scrolling"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/lightbox.min.css"><link rel="stylesheet" type="text/css" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/font.css"><link rel="stylesheet" type="text/css" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/content.css"><!--[if lt IE 9]><script src="https://t1.daumcdn.net/tistory_admin/lib/jquery/jquery-1.12.4.min.js"></script><![endif]--><!--[if gte IE 9]>
+<!--><script type="text/javascript" async="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/analytics.js.다운로드"></script><script type="text/javascript" async="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/js"></script><script src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/jquery-3.2.1.min.js.다운로드"></script><!--<![endif]-->
+<script src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/lightbox-plus-jquery.min.js.다운로드"></script>
+<script>
+lightbox.options.fadeDuration = 200;
+lightbox.options.resizeDuration = 200;
+lightbox.options.wrapAround = false;
+lightbox.options.albumLabel = "%1 / %2";
+</script>
+<script>var tjQuery = jQuery.noConflict(true);</script><style type="text/css">.tt_article_useless_p_margin p {padding-top:0 !important;padding-bottom:0 !important;margin-top:0 !important;margin-bottom:0 !important;}</style><meta name="referrer" content="always"><link rel="icon" href="https://tistory3.daumcdn.net/tistory/1840821/124e5715247741b8899edd95a13280b0"><link rel="apple-touch-icon" href="https://img1.daumcdn.net/thumb/C180x180/?fname=https%3A%2F%2Ftistory2.daumcdn.net%2Ftistory%2F1840821%2Fattach%2F692980f4c4ba4594a45eade842c9bfa8">
+<link rel="apple-touch-icon" sizes="76x76" href="https://img1.daumcdn.net/thumb/C76x76/?fname=https%3A%2F%2Ftistory2.daumcdn.net%2Ftistory%2F1840821%2Fattach%2F692980f4c4ba4594a45eade842c9bfa8">
+<link rel="apple-touch-icon" sizes="120x120" href="https://img1.daumcdn.net/thumb/C120x120/?fname=https%3A%2F%2Ftistory2.daumcdn.net%2Ftistory%2F1840821%2Fattach%2F692980f4c4ba4594a45eade842c9bfa8">
+<link rel="apple-touch-icon" sizes="152x152" href="https://img1.daumcdn.net/thumb/C152x152/?fname=https%3A%2F%2Ftistory2.daumcdn.net%2Ftistory%2F1840821%2Fattach%2F692980f4c4ba4594a45eade842c9bfa8">
+<meta name="google-adsense-platform-account" content="ca-host-pub-9691043933427338">
+<meta name="google-adsense-platform-domain" content="tistory.com">
+<meta name="description" content="이진 트리(Binary Tree)는 최대 두 개의 자식 노드를 가진느 트리 형태의 자료구조로, 단순히 값을 저장하는 용도보다는 효율적인 탐색 혹은 정렬을 위하여 사용됩니다. 이진 탐색 트리(Binary Search Tree)를 사..">
+
+<!-- BEGIN OPENGRAPH -->
+<link rel="canonical" href="https://geonlee.tistory.com/72"><meta property="og:type" content="article"><meta property="og:url" content="https://geonlee.tistory.com/72"><meta property="og:article:author" content="택시 운전사"><meta property="og:site_name" content="빠리의 택시 운전사"><meta property="og:title" content="파이썬을 이용해서 이진 탐색 트리 구현하기 🎄"><meta name="by" content="택시 운전사"><meta property="og:description" content="이진 트리(Binary Tree)는 최대 두 개의 자식 노드를 가진느 트리 형태의 자료구조로, 단순히 값을 저장하는 용도보다는 효율적인 탐색 혹은 정렬을 위하여 사용됩니다. 이진 탐색 트리(Binary Search Tree)를 사.."><meta property="og:image" content="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&amp;fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99AD154D5C5C50D932"><meta property="article:section" content="IT 인터넷">
+<!-- END OPENGRAPH -->
+
+
+
+<!-- BEGIN TWITTERCARD -->
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@TISTORY"><meta name="twitter:title" content="파이썬을 이용해서 이진 탐색 트리 구현하기 🎄"><meta name="twitter:description" content="이진 트리(Binary Tree)는 최대 두 개의 자식 노드를 가진느 트리 형태의 자료구조로, 단순히 값을 저장하는 용도보다는 효율적인 탐색 혹은 정렬을 위하여 사용됩니다. 이진 탐색 트리(Binary Search Tree)를 사.."><meta property="twitter:image" content="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&amp;fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99AD154D5C5C50D932">
+<!-- END TWITTERCARD -->
+
+
+
+<!-- BEGIN DAUMAPP -->
+<meta property="dg:plink" content="https://geonlee.tistory.com/72"><meta name="plink" content="https://geonlee.tistory.com/72"><meta name="title" content="파이썬을 이용해서 이진 탐색 트리 구현하기 🎄"><meta name="article:media_name" content="빠리의 택시 운전사"><meta property="article:mobile_url" content="https://geonlee.tistory.com/m/72"><meta property="article:pc_url" content="https://geonlee.tistory.com/72"><meta property="article:mobile_view_url" content="https://geonlee.tistory.com/m/72"><meta property="article:pc_view_url" content="https://geonlee.tistory.com/72"><meta property="article:talk_channel_view_url" content="https://geonlee.tistory.com/m/72"><meta property="article:pc_service_home" content="https://www.tistory.com"><meta property="article:mobile_service_home" content="https://www.tistory.com/m"><meta property="article:txid" content="1840821_72"><meta property="article:published_time" content="2019-02-08T01:10:56+09:00"><meta property="og:regDate" content="20190208011056"><meta property="article:modified_time" content="2020-12-02T11:59:37+09:00">
+<!-- END DAUMAPP -->
+
+
+
+<!-- BEGIN STRUCTURED_DATA -->
+<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"BlogPosting","mainEntityOfPage":{"@id":"https:\/\/geonlee.tistory.com\/72"},"url":"https:\/\/geonlee.tistory.com\/72","headline":"\ud30c\uc774\uc36c\uc744 \uc774\uc6a9\ud574\uc11c \uc774\uc9c4 \ud0d0\uc0c9 \ud2b8\ub9ac \uad6c\ud604\ud558\uae30 \ud83c\udf84","description":"\uc774\uc9c4 \ud2b8\ub9ac(Binary Tree)\ub294 \ucd5c\ub300 \ub450 \uac1c\uc758 \uc790\uc2dd \ub178\ub4dc\ub97c \uac00\uc9c4\ub290 \ud2b8\ub9ac \ud615\ud0dc\uc758 \uc790\ub8cc\uad6c\uc870\ub85c, \ub2e8\uc21c\ud788 \uac12\uc744 \uc800\uc7a5\ud558\ub294 \uc6a9\ub3c4\ubcf4\ub2e4\ub294 \ud6a8\uc728\uc801\uc778 \ud0d0\uc0c9 \ud639\uc740 \uc815\ub82c\uc744 \uc704\ud558\uc5ec \uc0ac\uc6a9\ub429\ub2c8\ub2e4. \uc774\uc9c4 \ud0d0\uc0c9 \ud2b8\ub9ac(Binary Search Tree)\ub97c \uc0ac..","author":{"@type":"Person","name":"\ud0dd\uc2dc \uc6b4\uc804\uc0ac"},"image":{"@type":"ImageObject","url":"https:\/\/img1.daumcdn.net\/thumb\/R800x0\/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99AD154D5C5C50D932","width":"800px","height":"800px"},"datePublished":"20190208T01:10:56+09:00","dateModified":"20201202T11:59:37+09:00","publisher":{"@type":"Organization","name":"TISTORY","logo":{"@type":"ImageObject","url":"https:\/\/t1.daumcdn.net\/tistory_admin\/static\/images\/openGraph\/opengraph.png","width":"800px","height":"800px"}}}</script><meta name="robots" content="max-image-preview:large">
+<!-- END STRUCTURED_DATA -->
+
+        <script data-ad-host="ca-host-pub-9691043933427338" data-ad-client="ca-pub-9994255438328666" async="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/f.txt"></script>
+
+<!-- tocbot -->
+<script src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/tocbot.min.js.다운로드"></script>
+<link rel="stylesheet" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/tocbot.css"> <!-- tocbot -->
+	
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/js(1)"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154371650-1');
+</script>
+<!-- Google Analytics -->
+	
+<!-- Version 11.5.2 -->
+
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="naver-site-verification" content="7477a14ddaaa89fc696ad3fe73b400ae156eb22e">
+<title>파이썬을 이용해서 이진 탐색 트리 구현하기 🎄</title>
+<link rel="alternate" type="application/rss+xml" title="빠리의 택시 운전사" href="https://geonlee.tistory.com/rss">
+<link rel="preconnect" href="https://cdn.jsdelivr.net/">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net/">
+<link rel="preconnect" href="https://fonts.gstatic.com/">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+
+
+<link rel="preconnect" href="https://tistory3.daumcdn.net/tistory/1840821/skin/">
+<link rel="dns-prefetch" href="https://tistory3.daumcdn.net/tistory/1840821/skin/">
+
+<link rel="preconnect" href="https://img1.daumcdn.net/">
+<link rel="dns-prefetch" href="https://img1.daumcdn.net/">
+<link rel="preconnect" href="https://t1.daumcdn.net/">
+<link rel="dns-prefetch" href="https://t1.daumcdn.net/">
+<link rel="preconnect" href="https://developers.kakao.com/">
+<link rel="dns-prefetch" href="https://developers.kakao.com/">
+<link rel="preload" as="script" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/jquery-3.2.1.min.js.다운로드">
+<link rel="preload" as="script" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/lightbox-plus-jquery.min.js.다운로드">
+<link rel="preload" as="script" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/kakao.min.js.다운로드">
+<link rel="preload" as="script" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/f.txt">
+
+<link rel="preload" as="script" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/script_polyfills.js.다운로드">
+<link rel="preload" as="script" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/script.js.다운로드">
+<link rel="preload" as="script" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/script_sidebar.js.다운로드">
+<link rel="preload" as="script" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/script_appearance.js.다운로드">
+<link rel="preload" as="style" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/style_base.css">
+<link rel="preload" as="style" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/style_common.css">
+<link rel="preload" as="style" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/style_sidebar.css">
+
+
+<link rel="preload" as="style" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/css2">
+<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/gh/kaniwari/space@11.5.2/resources/font_icon.woff2" crossorigin="">
+<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/gh/kaniwari/fcresources@1.0/font/font_sans_400.woff2" crossorigin="">
+<link rel="preload" as="font" type="font/woff2" href="https://cdn.jsdelivr.net/gh/kaniwari/fcresources@1.0/font/font_sans_700.woff2" crossorigin="">
+<script src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/script_polyfills.js.다운로드"></script>
+
+<script>let
+$themeColor="transparent",$themeColorOrig=$themeColor.toLowerCase(),$date=new Date();if(document.querySelectorAll("html.dynamic").length>0){const $html=document.getElementsByTagName("html")[0];if($date.getHours()<6||$date.getHours()>18){$html.classList.add("night");}
+else if($date.getHours()==6||$date.getHours()==7||$date.getHours()==17||$date.getHours()==18){$html.classList.add("dawn");}
+else{$html.classList.add("day");};};if($themeColor.toLowerCase()=="transparent"){if(document.querySelectorAll("html.day:not(.sysui)").length>0){$themeColor="#f4f4f4";}
+else if(document.querySelectorAll("html.dawn").length>0){$themeColor="#d9d0c3";}
+else if(document.querySelectorAll("html.night").length>0){$themeColor="#0e0e0e";};if(document.querySelectorAll("html:not(.sysui)").length>0){let theme=document.createElement("meta");theme.name="theme-color";theme.content=$themeColor;document.head.appendChild(theme);};}
+else{let theme=document.createElement("meta");theme.name="theme-color";theme.content=$themeColor;document.head.appendChild(theme);};</script><meta name="theme-color" content="#f4f4f4">
+<script data-ad-client="ca-pub-9994255438328666" async="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/f.txt"></script>
+<link rel="stylesheet" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/style_base.css">
+
+<link rel="stylesheet" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/style.css">
+<style>.page-limit-width{max-width:728px!important}@media(max-width:calc(728px + 800px)){html.no-gpu body#tt-body-page .recommendation{display:none!important}html.gpu body#tt-body-page .recommendation{opacity:0!important}}@media(min-width:1100px){html:not(.fixed-sidebar) .page-limit-width{width:728px;max-width:970px!important}}@media(min-width:1380px){html.fixed-sidebar .page-limit-width{width:728px;max-width:970px!important}}</style>
+<!-- BEGIN GOOGLE_SITE_VERIFICATION -->
+<meta name="google-site-verification" content="mV5z46a3sPNog7wnlRaXdmt06tpxojap0d3ENsfgdvc">
+<!-- END GOOGLE_SITE_VERIFICATION --><script async="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/js(1)"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config','UA-154371650-1');
+</script>
+<style type="text/css">
+		#daumSearchBox {
+			height: 21px;
+			background-image : url(//i1.daumcdn.net/imgsrc.search/search_all/show/tistory/plugin/bg_search2_2.gif);
+			margin: 5px auto ;
+			padding: 0;
+		}
+		#daumSearchBox input {
+			background: none;
+			margin : 0;
+			padding : 0;
+			border : 0;
+		}
+		#daumSearchBox #daumLogo {
+			width: 34px;
+			height: 21px;
+			float: left;
+			margin-right: 5px;
+			background-image : url(//i1.daumcdn.net/img-media/tistory/img/bg_search1_2_2010ci.gif);
+		}
+		#daumSearchBox #show_q {
+			background-color: transparent;
+			border: none;
+			font: 12px Gulim, Sans-serif;
+			color: #555;
+			margin-top: 4px;
+			margin-right: 15px;
+			float: left;
+		}
+
+		#daumSearchBox #show_btn {
+			background-image : url(//i1.daumcdn.net/imgsrc.search/search_all/show/tistory/plugin/bt_search_2.gif);
+			width: 37px;
+			height: 21px;
+			float: left;
+			margin:0;
+			cursor:pointer;
+			text-indent:-1000em;
+		}
+	</style>
+<link rel="stylesheet" type="text/css" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/style(1).css">
+<script type="text/javascript" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/profile.js.다운로드"></script>
+	<style type="text/css">
+		.another_category { border: 1px solid #E5E5E5; padding: 10px 10px 5px; margin:10px 0; clear: both; }
+		.another_category h4 { font-size: 12px !important; margin: 0 !important; border-bottom: 1px solid #E5E5E5 !important; padding: 2px 0 6px !important; }
+		.another_category h4 a { font-weight: bold !important; }
+		.another_category table { table-layout: fixed; border-collapse: collapse; width: 100% !important; margin-top: 10px !important; }
+		* html .another_category table { width: auto !important; }
+		*:first-child+html .another_category table { width: auto !important; }
+		.another_category th, .another_category td { padding: 0 0 4px !important; }
+		.another_category th { text-align: left; font-size: 12px !important; font-weight: normal;  word-break: break-all; overflow: hidden; line-height: 1.5; }
+		.another_category td { text-align: right; width: 80px; font-size: 11px; }
+		.another_category th a { font-weight: normal; text-decoration: none; border: none !important; }
+		.another_category th a.current{ font-weight: bold; text-decoration: none !important; border-bottom: 1px solid !important; }
+		.another_category th span { font-weight: normal; text-decoration: none; font: 10px Tahoma, Sans-serif; border: none !important; }
+
+		.another_category_color_gray, .another_category_color_gray h4 { border-color: #E5E5E5 !important; }
+		.another_category_color_gray * { color: #909090 !important; }
+		.another_category_color_gray th a.current{border-color:#909090 !important;}
+		.another_category_color_gray h4, .another_category_color_gray h4 a { color: #737373 !important; }
+
+
+		.another_category_color_red, .another_category_color_red h4 { border-color: #F6D4D3 !important;  }
+		.another_category_color_red * { color: #E86869 !important; }
+		.another_category_color_red th a.current{border-color:#E86869 !important;}
+		.another_category_color_red h4, .another_category_color_red h4 a { color: #ED0908 !important; }
+
+
+		.another_category_color_green, .another_category_color_green h4 { border-color: #CCE7C8 !important; }
+		.another_category_color_green * { color: #64C05B !important; }
+		.another_category_color_green th a.current{border-color:#64C05B !important;}
+		.another_category_color_green h4, .another_category_color_green h4 a { color: #3EA731 !important; }
+
+
+		.another_category_color_blue, .another_category_color_blue h4 { border-color: #C8DAF2 !important; }
+		.another_category_color_blue * { color: #477FD6 !important; }
+		.another_category_color_blue th a.current{border-color:#477FD6 !important;}
+		.another_category_color_blue h4, .another_category_color_blue h4 a { color: #1960CA !important; }
+
+
+		.another_category_color_violet, .another_category_color_violet h4 { border-color: #E1CEEC !important;  }
+		.another_category_color_violet * { color:#9D64C5 !important; }
+		.another_category_color_violet th a.current{border-color:#9D64C5 !important;}
+		.another_category_color_violet h4, .another_category_color_violet h4 a { color: #7E2CB5 !important; }
+	</style>
+<script type="text/javascript">
+        
+        window.TistoryBlog = {
+            basePath: "",
+            url: "https://geonlee.tistory.com",
+            tistoryUrl: "https://geonlee.tistory.com",
+			manageUrl: 'https://geonlee.tistory.com/manage',
+            token: 'NrgJ1gmgpAouVtVr1+8XzQ=='
+        };
+        var servicePath = "";
+        var blogURL = "";
+    </script>
+
+	<script> (function() { window.orgjQuery = window.jQuery; window.jQuery = tjQuery })()</script>
+    <script type="text/javascript" defer="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/reaction-button-container.min.js.다운로드"></script>
+    <script> (function() { window.jQuery = window.orgjQuery; delete window.orgjQuery })()</script>
+        <script type="text/javascript" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/base.js.다운로드"></script>
+        <link rel="stylesheet" type="text/css" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/dialog.css">
+            <link rel="stylesheet" type="text/css" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/font(1).css">
+    <link rel="stylesheet" type="text/css" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/postBtn.css">
+        <link rel="stylesheet" type="text/css" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/tistory.css">
+        <script type="text/javascript" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/kakao.min.js.다운로드"></script>
+
+        <link rel="stylesheet" type="text/css" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/revenue.css"><link rel="stylesheet" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/vs2015.min.css"><style type="text/css">.hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}</style><style type="text/css">#DragSchLayer{display:block;position:absolute;z-index:1000;width:61px;height:31px;margin:-30px 0px 0px -5px;background:url(//search1.daumcdn.net/search/statics/common/pi/btn_drag_rect.png);cursor:pointer}             @media             only screen and (-webkit-min-device-pixel-ratio: 1.5),             only screen and (min-device-pixel-ratio: 1.5),             only screen and (min-resolution: 1.5dppx) {             #DragSchLayer{background-image:url(//search1.daumcdn.net/search/statics/common/pi/r2/btn_drag_rect.png);background-size:61px 31px}}            </style><link rel="stylesheet" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/style_article.css"><link rel="stylesheet" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/style_activity.css"><link rel="stylesheet" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/style_index.css"><link rel="stylesheet" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/style_comment.css"><style data-css="comments">.comment-control:before{width:calc(808px + 10px)}</style><link rel="stylesheet" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/css2"><link rel="stylesheet" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/style_common.css"><link rel="stylesheet" href="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/style_sidebar.css"><style>.sidebar .info-module:before{background-color:TRANSPARENT}html.day #article.fc *:not(.download) a{color:#647788}html.day #article.fc .footnote a{color:#647788!important}html.day.no-touch a:hover,html.day.no-touch #article.fc *:not(.download) a:hover,html.day.no-touch .fc-icon:hover:before,html.day.no-touch .fc-icon:hover:after,html.day.no-touch .gnb-blog-link:hover+p,html.day.no-touch .gnb-blog-link:hover+p+span,html.day.no-touch .text-type .index-item-link:hover+.index-item-visual .index-item-text h2,html.day.no-touch .card-type .index-item-link:hover+.index-item-visual .index-item-text h2,html.day.no-touch .tt_more_preview_comments_text:hover,html.day.no-touch #export:not(.disabled) .export-link:hover+.export-visual.subscribe-on-tistory:after,html.day.no-touch.fixed-sidebar .sidebar-title-link:hover + .sidebar-title-inner p,html.day.no-touch.fixed-sidebar.original-module-color .inner_header_layer .img_common_tistory:hover:before,html.day.no-touch.fixed-sidebar.original-module-color .sidebar a:hover,html.day.no-touch.fixed-sidebar.original-module-color .sidebar a:hover + .post-module-visual p,html.day.no-touch.fixed-sidebar.original-module-color .inner_header_layer .img_common_tistory:hover:before,html.day.no-touch.fixed-sidebar.original-module-color .sidebar button:hover:before,html.day.no-touch.fixed-sidebar.original-module-color .sidebar button:hover:after,html.day.touch a.hover,html.day.touch #article.fc *:not(.download) a.hover,html.day.touch .fc-icon.hover:before,html.day.touch .fc-icon.hover:after,html.day.touch .gnb-blog-link.hover+p,html.day.touch .gnb-blog-link.hover+p+span,html.day.touch .text-type .index-item-link.hover+.index-item-visual .index-item-text h2,html.day.touch .card-type .index-item-link.hover+.index-item-visual .index-item-text h2,html.day.touch .tt_more_preview_comments_text.hover,html.day.touch #export:not(.disabled) .export-link.hover+.export-visual.subscribe-on-tistory:after,html.day.touch.fixed-sidebar .sidebar-title-link.hover + .sidebar-title-inner p,html.day.touch.fixed-sidebar.original-module-color .inner_header_layer .img_common_tistory.hover:before,html.day.touch.fixed-sidebar.original-module-color .sidebar a.hover,html.day.touch.fixed-sidebar.original-module-color .sidebar a.hover + .post-module-visual p,html.day.touch.fixed-sidebar.original-module-color .inner_header_layer .img_common_tistory.hover:before,html.day.touch.fixed-sidebar.original-module-color .sidebar button.hover:before,html.day.touch.fixed-sidebar.original-module-color .sidebar button.hover:after,html.day .comment-toggle[aria-expanded="true"]:before,html.day .comment-item.located .comment-desc:after{color:#349aff}html.day.no-touch #article.fc .footnote a:hover,html.day.no-touch #article.fc figure[data-ke-type="opengraph"] a:hover div.og-text p.og-title,html.day.no-touch #article.fc .another-category a:hover,html.day.no-touch #article.fc .txc-info a:hover:not(.compare),html.day.sysui.no-touch #export:not(.disabled) .export-link:hover+.export-visual.subscribe-on-tistory:after,html.night.no-touch #export:not(.disabled) .export-link:hover+.export-visual.subscribe-on-tistory:after,html.day.touch #article.fc .footnote a.hover,html.day.touch #article.fc figure[data-ke-type="opengraph"] a.hover div.og-text p.og-title,html.day.touch #article.fc .another-category a.hover,html.day.touch #article.fc .txc-info a.hover:not(.compare),html.day.sysui.touch #export:not(.disabled) .export-link.hover+.export-visual.subscribe-on-tistory:after,html.night.touch #export:not(.disabled) .export-link.hover+.export-visual.subscribe-on-tistory:after{color:#349aff!important}html.day.no-touch #article.fc button.btn_more:hover,html.day.no-touch #article.fc button.btn_less:hover,html.day.no-touch #article.fc div[data-ke-type*="moreLess"] a.btn-toggle-moreless:hover,html.day.no-touch #article.fc .download a:hover,html.day.no-touch #article.fc figure.fileblock a:hover,html.day.no-touch #view-more-next:hover,html.day.no-touch #view-more-prev:hover,html.day.no-touch .tag-cloud li a:hover,html.day.no-touch .tags-trail a:hover,html.no-touch:not(.dawn) #article.fc .container_postbtn .btn_subscription:hover,html.day.no-touch .alert.error a:hover,html.day.touch #article.fc button.btn_more.hover,html.day.touch #article.fc button.btn_less.hover,html.day.touch #article.fc div[data-ke-type*="moreLess"] a.btn-toggle-moreless.hover,html.day.touch #article.fc .download a.hover,html.day.touch #article.fc figure.fileblock a.hover,html.day.touch #view-more-next.hover,html.day.touch #view-more-prev.hover,html.day.touch .tag-cloud li a.hover,html.day.touch .tags-trail a.hover,html.touch:not(.dawn) #article.fc .container_postbtn .btn_subscription.hover,html.day.touch .alert.error a.hover{background-color:#349aff}html.day.no-touch:not(.sysui) #textRefresh:hover,html.day.touch:not(.sysui) #textRefresh.hover{background:#349aff!important}html.dawn #article.fc *:not(.download) a{color:#59656d}html.dawn #article.fc .footnote a{color:#59656d!important}html.dawn.no-touch a:hover,html.dawn.no-touch #article.fc *:not(.download) a:hover,html.dawn.no-touch .fc-icon:hover:before,html.dawn.no-touch .fc-icon:hover:after,html.dawn.no-touch .gnb-blog-link:hover+p,html.dawn.no-touch .gnb-blog-link:hover+p+span,html.dawn.no-touch .text-type .index-item-link:hover+.index-item-visual .index-item-text h2,html.dawn.no-touch .card-type .index-item-link:hover+.index-item-visual .index-item-text h2,html.dawn.no-touch .tt_more_preview_comments_text:hover,html.dawn.no-touch #export:not(.disabled) .export-link:hover+.export-visual.subscribe-on-tistory:after,html.dawn.no-touch.fixed-sidebar .sidebar-title-link:hover + .sidebar-title-inner p,html.dawn.no-touch.fixed-sidebar.original-module-color .inner_header_layer .img_common_tistory:hover:before,html.dawn.no-touch.fixed-sidebar.original-module-color .sidebar a:hover,html.dawn.no-touch.fixed-sidebar.original-module-color .sidebar a:hover + .post-module-visual p,html.dawn.no-touch.fixed-sidebar.original-module-color .inner_header_layer .img_common_tistory:hover:before,html.dawn.no-touch.fixed-sidebar.original-module-color .sidebar button:hover:before,html.dawn.no-touch.fixed-sidebar.original-module-color .sidebar button:hover:after,html.dawn.touch a.hover,html.dawn.touch #article.fc *:not(.download) a.hover,html.dawn.touch .fc-icon.hover:before,html.dawn.touch .fc-icon.hover:after,html.dawn.touch .gnb-blog-link.hover+p,html.dawn.touch .gnb-blog-link.hover+p+span,html.dawn.touch .text-type .index-item-link.hover+.index-item-visual .index-item-text h2,html.dawn.touch .card-type .index-item-link.hover+.index-item-visual .index-item-text h2,html.dawn.touch .tt_more_preview_comments_text.hover,html.dawn.touch #export:not(.disabled) .export-link.hover+.export-visual.subscribe-on-tistory:after,html.dawn.touch.fixed-sidebar .sidebar-title-link.hover + .sidebar-title-inner p,html.dawn.touch.fixed-sidebar.original-module-color .sidebar a.hover,html.dawn.touch.fixed-sidebar.original-module-color .sidebar a.hover + .post-module-visual p,html.dawn.touch.fixed-sidebar.original-module-color .inner_header_layer .img_common_tistory.hover:before,html.dawn.touch.fixed-sidebar.original-module-color .sidebar button.hover:before,html.dawn.touch.fixed-sidebar.original-module-color .sidebar button.hover:after,html.dawn .comment-toggle[aria-expanded="true"]:before,html.dawn .comment-item.located .comment-desc:after {color:#2284d9}html.dawn.no-touch #article.fc .footnote a:hover,html.dawn.no-touch #article.fc figure[data-ke-type="opengraph"] a:hover div.og-text p.og-title,html.dawn.no-touch #article.fc .another-category a:hover,html.dawn.no-touch #article.fc .txc-info a:hover:not(.compare),html.dawn.touch #article.fc .footnote a.hover,html.dawn.touch #article.fc figure[data-ke-type="opengraph"] a.hover div.og-text p.og-title,html.dawn.touch #article.fc .another-category a.hover,html.dawn.touch #article.fc .txc-info a.hover:not(.compare){color: #2284d9!important}html.dawn.no-touch #article.fc button.btn_more:hover,html.dawn.no-touch #article.fc button.btn_less:hover,html.dawn.no-touch #article.fc div[data-ke-type*="moreLess"] a.btn-toggle-moreless:hover,html.dawn.no-touch #article.fc .download a:hover,html.dawn.no-touch #article.fc figure.fileblock a:hover,html.dawn.no-touch #view-more-next:hover,html.dawn.no-touch #view-more-prev:hover,html.dawn.no-touch .tag-cloud li a:hover,html.dawn.no-touch .tags-trail a:hover,html.dawn.no-touch #article.fc .container_postbtn .btn_subscription:hover,html.dawn.no-touch .alert.error a:hover,html.dawn.touch #article.fc button.btn_more.hover,html.dawn.touch #article.fc button.btn_less.hover,html.dawn.touch #article.fc div[data-ke-type*="moreLess"] a.btn-toggle-moreless.hover,html.dawn.touch #article.fc .download a.hover,html.dawn.touch #article.fc figure.fileblock a.hover,html.dawn.touch #view-more-next.hover,html.dawn.touch #view-more-prev.hover,html.dawn.touch .tag-cloud li a.hover,html.dawn.touch .tags-trail a.hover,html.dawn.touch #article.fc .container_postbtn .btn_subscription.hover,html.dawn.touch .alert.error a.hover{background-color:#2284d9}html.dawn.no-touch #textRefresh:hover,html.dawn.touch #textRefresh.hover{background: #2284d9!important}html.night #article.fc *:not(.download) a{color:#748a96}html.night #article.fc .footnote a{color:#748a96!important}html.night.no-touch a:hover,html.night.no-touch #article.fc *:not(.download) a:hover,html.night.no-touch .fc-icon:hover:not(.fc-circle):before,html.night.no-touch .fc-icon:hover:not(.fc-circle):after,html.night.no-touch .gnb-blog-link:hover+p,html.night.no-touch .gnb-blog-link:hover + p + span,html.night.no-touch .text-type .index-item-link:hover+.index-item-visual .index-item-text h2,html.night.no-touch .card-type .index-item-link:hover+.index-item-visual .index-item-text h2,html.night.no-touch #article.fc .download a:hover,html.night.no-touch #article.fc figure.fileblock a:hover *,html.night.no-touch #view-more-next:hover,html.night.no-touch #view-more-prev:hover,html.night.no-touch .tag-cloud li a:hover,html.night.no-touch .tt_more_preview_comments_text:hover,html.night.no-touch #export:not(.disabled) .export-link:hover + .export-visual.subscribe-on-tistory:after,html.night.no-touch.fixed-sidebar .sidebar-title-link:hover + .sidebar-title-inner p,html.night.no-touch.fixed-sidebar.original-module-color .sidebar a:hover,html.night.no-touch.fixed-sidebar.original-module-color .sidebar a:hover + .post-module-visual p,html.night.no-touch.fixed-sidebar.original-module-color .inner_header_layer .img_common_tistory:hover:before,html.night.no-touch.fixed-sidebar.original-module-color .sidebar button:hover:before,html.night.no-touch.fixed-sidebar.original-module-color .sidebar button:hover:after,html.night.touch a.hover,html.night.touch #article.fc *:not(.download) a.hover,html.night.touch .fc-icon.hover:not(.fc-circle):before,html.night.touch .fc-icon.hover:not(.fc-circle):after,html.night.touch .gnb-blog-link.hover+p,html.night.touch .gnb-blog-link.hover+p+span,html.night.touch .text-type .index-item-link.hover+.index-item-visual .index-item-text h2,html.night.touch .card-type .index-item-link.hover+.index-item-visual .index-item-text h2,html.night.touch #article.fc .download a.hover,html.night.touch #article.fc figure.fileblock a.hover *,html.night.touch #view-more-next.hover,html.night.touch #view-more-prev.hover,html.night.touch .tag-cloud li a:hover,html.night.touch .tt_more_preview_comments_text.hover,html.night.touch #export:not(.disabled) .export-link.hover + .export-visual.subscribe-on-tistory:after,html.night.touch.fixed-sidebar .sidebar-title-link.hover + .sidebar-title-inner p,html.night.touch.fixed-sidebar.original-module-color .sidebar a.hover,html.night.touch.fixed-sidebar.original-module-color .sidebar a.hover + .post-module-visual p,html.night.touch.fixed-sidebar.original-module-color .inner_header_layer .img_common_tistory.hover:before,html.night.touch.fixed-sidebar.original-module-color .sidebar button.hover:before,html.night.touch.fixed-sidebar.original-module-color .sidebar button.hover:after,html.night .comment-toggle[aria-expanded="true"]:before,html.night .comment-item.located .comment-desc:after{color:#74d5ff}html.night.no-touch #article.fc .footnote a:hover,html.night.no-touch #textRefresh:hover,html.night.no-touch #article.fc figure[data-ke-type="opengraph"] a:hover div.og-text p.og-title,html.night.no-touch #article.fc .another-category a:hover,html.night.no-touch #article.fc .txc-info a:hover:not(.compare),html.no-touch .close-sidebar:hover:before,html.no-touch .close-blog-info:hover:before,html.no-touch:not(.fixed-sidebar) .search-button:hover:before,html.no-touch:not(.fixed-sidebar) .sidebar-func-list a:hover:before,html.no-touch .lb-close:hover:before,html.no-touch .index-item-slider button:hover:before,html.no-touch .reply-wrap .comment-desc a:hover,html.no-touch:not(.fixed-sidebar) .inner_header_layer>.info_profile .link_setting:hover,html.no-touch:not(.fixed-sidebar) .inner_header_layer .img_common_tistory:hover:before,html.night.no-touch #article.fc button.btn_more:hover,html.night.no-touch #article.fc button.btn_less:hover,html.night.no-touch #article.fc div[data-ke-type="moreLess"] a.btn-toggle-moreless:hover,html.no-touch.page-cover-support.gh-top #tt-body-page .open-sidebar:hover:before,html.no-touch.page-cover-support.gh-top #tt-body-page .open-sidebar:hover:after,html.no-touch.page-cover-support.gh-top #tt-body-guestbook .open-sidebar:hover:before,html.no-touch.page-cover-support.gh-top #tt-body-guestbook .open-sidebar:hover:after,html.no-touch.page-cover-support #tt-body-page #global-header a:hover,html.no-touch.fixed-sidebar.page-cover-support #global-header .admin-func a:hover:before,html.night.no-touch #article.fc .download a:hover,html.night.no-touch #article.fc figure.fileblock a:hover,html.night.no-touch #article.fc figure.fileblock a:hover *,html.night.no-touch .tags-trail a:hover,html.night.no-touch #textRefresh:hover,html.night.no-touch .tag-cloud li a:hover,html.night.no-touch .alert.error a:hover,html.night.touch #article.fc .footnote a.hover,html.night.touch #textRefresh.hover,html.night.touch #article.fc figure[data-ke-type="opengraph"] a.hover div.og-text p.og-title,html.night.touch #article.fc .txc-info a.hover:not(.compare),html.night.touch #article.fc .another-category a.hover,html.touch .close-sidebar.hover:before,html.touch .close-blog-info.hover:before,html.touch:not(.fixed-sidebar) .search-button.hover:before,html.touch:not(.fixed-sidebar) .sidebar-func-list a.hover:before,html.touch .lb-close.hover:before,html.touch .index-item-slider button.hover:before,html.touch .reply-wrap .comment-desc a.hover,html.touch:not(.fixed-sidebar) .inner_header_layer>.info_profile .link_setting.hover,html.touch:not(.fixed-sidebar) .inner_header_layer .img_common_tistory.hover:before,html.night.touch #article.fc .download a.hover,html.night.touch #article.fc figure.fileblock a.hover,html.night.touch #article.fc figure.fileblock a.hover *,html.night.touch #article.fc button.btn_more.hover,html.night.touch #article.fc button.btn_less.hover,html.night.touch #article.fc div[data-ke-type="moreLess"] a.btn-toggle-moreless.hover,html.night.touch .tags-trail a.hover,html.night.touch #textRefresh.hover,html.night.touch .tag-cloud li a.hover,html.night.touch .alert.error a.hover,html.touch.page-cover-support.gh-top #tt-body-page .open-sidebar.hover:before,html.touch.page-cover-support.gh-top #tt-body-page .open-sidebar.hover:after,html.touch.page-cover-support.gh-top #tt-body-guestbook .open-sidebar.hover:before,html.touch.page-cover-support.gh-top #tt-body-guestbook .open-sidebar.hover:after,html.touch.page-cover-support #tt-body-page #global-header a.hover,html.touch.fixed-sidebar.page-cover-support #global-header .admin-func a.hover:before{color:#74d5ff!important}html.night.no-touch .fc-circle:hover:before,html.night.touch .fc-circle.hover:before{background-color:#74d5ff}#wrap div.base-page-cover, #wrap div.parent-page-cover{background-image:url(//img1.daumcdn.net/thumb/R48x0/?scode=mtistory2&fname=https://tistory2.daumcdn.net/tistory/1840821/skinSetting/bd097c01fbea4535b911da2b8c78702d)}#wrap div.small-cover{background-image:url(//img1.daumcdn.net/thumb/R1024x0/?scode=mtistory2&fname=https://tistory2.daumcdn.net/tistory/1840821/skinSetting/bd097c01fbea4535b911da2b8c78702d)}#wrap div.medium-cover{background-image:url(//img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://tistory2.daumcdn.net/tistory/1840821/skinSetting/bd097c01fbea4535b911da2b8c78702d)}#wrap div.large-cover{background-image:url(//img1.daumcdn.net/thumb/R1920x0/?scode=mtistory2&fname=https://tistory2.daumcdn.net/tistory/1840821/skinSetting/bd097c01fbea4535b911da2b8c78702d)}#wrap div.exlarge-cover{background-image:url(//img1.daumcdn.net/thumb/R2560x0/?scode=mtistory2&fname=https://tistory2.daumcdn.net/tistory/1840821/skinSetting/bd097c01fbea4535b911da2b8c78702d)}html.no-touch.fixed-sidebar .sidebar-area a:hover:not(.txt_id_type2),html.no-touch.fixed-sidebar .sidebar-area button:hover:before,html.no-touch.fixed-sidebar .sidebar-area button:hover:after,html.no-touch.fixed-sidebar .sidebar-title-link:hover + .sidebar-title-inner p,html.no-touch.fixed-sidebar .inner_header_layer .img_common_tistory:hover:before,html.no-touch.fixed-sidebar .sidebar a:hover + .post-module-visual p,html.touch.fixed-sidebar .sidebar-area a.hover:not(.txt_id_type2),html.touch.fixed-sidebar .sidebar-area button.hover:before,html.touch.fixed-sidebar .sidebar-area button.hover:after,html.touch.fixed-sidebar .sidebar-title-link.hover + .sidebar-title-inner p,html.touch.fixed-sidebar .inner_header_layer .img_common_tistory.hover:before,html.touch.fixed-sidebar .sidebar a.hover + .post-module-visual p{color:#349aff!important}html.dawn.no-touch.fixed-sidebar .sidebar-area a:hover:not(.txt_id_type2),html.dawn.no-touch.fixed-sidebar .sidebar-area button:hover:before,html.dawn.no-touch.fixed-sidebar .sidebar-area button:hover:after,html.dawn.no-touch.fixed-sidebar .sidebar-title-link:hover + .sidebar-title-inner p,html.dawn.no-touch.fixed-sidebar .inner_header_layer .img_common_tistory:hover:before,html.dawn.no-touch.fixed-sidebar .sidebar a:hover + .post-module-visual p,html.dawn.touch.fixed-sidebar .sidebar-area a.hover:not(.txt_id_type2),html.dawn.touch.fixed-sidebar .sidebar-area button.hover:before,html.dawn.touch.fixed-sidebar .sidebar-area button.hover:after,html.dawn.touch.fixed-sidebar .sidebar-title-link.hover + .sidebar-title-inner p,html.dawn.touch.fixed-sidebar .inner_header_layer .img_common_tistory.hover:before,html.dawn.touch.fixed-sidebar .sidebar a.hover + .post-module-visual p{color:#2284d9!important}html.night.no-touch.fixed-sidebar .sidebar-area a:hover:not(.txt_id_type2),html.night.no-touch.fixed-sidebar .sidebar-area button:hover:before,html.night.no-touch.fixed-sidebar .sidebar-area button:hover:after,html.night.no-touch.fixed-sidebar .sidebar-title-link:hover + .sidebar-title-inner p,html.night.no-touch.fixed-sidebar .inner_header_layer .img_common_tistory:hover:before,html.night.no-touch.fixed-sidebar .sidebar a:hover + .post-module-visual p,html.night.touch.fixed-sidebar .sidebar-area a.hover:not(.txt_id_type2),html.night.touch.fixed-sidebar .sidebar-area button.hover:before,html.night.touch.fixed-sidebar .sidebar-area button.hover:after,html.night.touch.fixed-sidebar .sidebar-title-link.hover + .sidebar-title-inner p,html.night.touch.fixed-sidebar .inner_header_layer .img_common_tistory.hover:before,html.night.touch.fixed-sidebar .sidebar a.hover + .post-module-visual p{color:#74d5ff!important}@media (prefers-color-scheme: dark) {html.day.sysui.no-touch.fixed-sidebar .sidebar-area a:hover:not(.txt_id_type2),html.day.sysui.no-touch.fixed-sidebar .sidebar-area button:hover:before,html.day.sysui.no-touch.fixed-sidebar .sidebar-area button:hover:after,html.day.sysui.no-touch.fixed-sidebar .sidebar-title-link:hover + .sidebar-title-inner p,html.day.sysui.no-touch.fixed-sidebar .inner_header_layer .img_common_tistory:hover:before,html.day.sysui.no-touch.fixed-sidebar .sidebar a:hover + .post-module-visual p,html.day.sysui.touch.fixed-sidebar .sidebar-area a.hover:not(.txt_id_type2),html.day.sysui.touch.fixed-sidebar .sidebar-area button.hover:before,html.day.sysui.touch.fixed-sidebar .sidebar-area button.hover:after,html.day.sysui.touch.fixed-sidebar .sidebar-title-link.hover + .sidebar-title-inner p,html.day.sysui.touch.fixed-sidebar .inner_header_layer .img_common_tistory.hover:before,html.day.sysui.touch.fixed-sidebar .sidebar a.hover + .post-module-visual p{color:#74d5ff!important}}pre{-moz-tab-size:2;tab-size:2}.imageblock:not(figure) img[width="728"]{width:100%}.comments{max-width:calc(728px + 80px)!important} #article.fc hr:not([data-ke-type="hr"]):not([data-ke-type="horizontalRule"]){width:calc(100vw + 40px)!important;margin-left:calc((100vw - 728px + 40px)/-2)!important}@media (max-width:728px){ #article.fc hr:not([data-ke-type="hr"]):not([data-ke-type="horizontalRule"]){width:auto!important;margin-left:-20px!important;margin-right:-20px!important}}@media (min-width:401px) and (min-width:calc(728px + 40px)) and (max-width:760px){ #article.fc pre, #article.fc .table-content, #article.fc .imageblock:not(figure):not(.no-edge), #article.fc .txc-info, #article.fc p[class*="moreless"], #article.fc div[class*="tt_adsense"], #article.fc .another-category{margin-left:calc((100vw - 728px)/-2)!important;margin-right:calc((100vw - 728px)/-2)!important} #article.fc pre, #article.fc .txc-info, #article.fc .table-content>div, #article.fc p[class*="moreless"], #article.fc .another-category, #article.fc .imageblock:not(figure):not(.no-edge) .ExifInfo, #article.fc .imageblock:not(figure):not(.no-edge) .cap1{padding-left:calc((100vw - 728px)/2)!important;padding-right:calc((100vw - 728px)/2)!important} #article.fc .txc-info .photo{right:calc((100vw - 728px)/2)!important}} #article.fc figure figcaption{max-width:728px;margin-left:auto;margin-right:auto}.page-limit-width{max-width:728px!important}@media (prefers-color-scheme: dark) {html.day.sysui #article.fc *:not(.download) a{color:#748a96}html.day.sysui #article.fc .footnote a{color:#748a96!important}html.day.sysui.no-touch a:hover,html.day.sysui.no-touch #article.fc *:not(.download) a:hover,html.day.sysui.no-touch .fc-icon:hover:not(.fc-circle):before,html.day.sysui.no-touch .fc-icon:hover:not(.fc-circle):after,html.day.sysui.no-touch .gnb-blog-link:hover+p,html.day.sysui.no-touch .gnb-blog-link:hover + p + span,html.day.sysui.no-touch .text-type .index-item-link:hover+.index-item-visual .index-item-text h2,html.day.sysui.no-touch .card-type .index-item-link:hover+.index-item-visual .index-item-text h2,html.day.sysui.no-touch #article.fc .download a:hover,html.day.sysui.no-touch #article.fc figure.fileblock a:hover *,html.day.sysui.no-touch #view-more-next:hover,html.day.sysui.no-touch #view-more-prev:hover,html.day.sysui.no-touch .tag-cloud li a:hover,html.day.sysui.no-touch .tt_more_preview_comments_text:hover,html.day.sysui.no-touch #export:not(.disabled) .export-link:hover + .export-visual.subscribe-on-tistory:after,html.day.sysui.no-touch.fixed-sidebar .sidebar-title-link:hover + .sidebar-title-inner p,html.day.sysui.no-touch.fixed-sidebar.original-module-color .sidebar a:hover,html.day.sysui.no-touch.fixed-sidebar.original-module-color .sidebar a:hover + .post-module-visual p,html.day.sysui.no-touch.fixed-sidebar.original-module-color .inner_header_layer .img_common_tistory:hover:before,html.day.sysui.no-touch.fixed-sidebar.original-module-color .sidebar button:hover:before,html.day.sysui.no-touch.fixed-sidebar.original-module-color .sidebar button:hover:after,html.day.sysui.touch a.hover,html.day.sysui.touch #article.fc *:not(.download) a.hover,html.day.sysui.touch .fc-icon.hover:not(.fc-circle):before,html.day.sysui.touch .fc-icon.hover:not(.fc-circle):after,html.day.sysui.touch .gnb-blog-link.hover+p,html.day.sysui.touch .gnb-blog-link.hover+p+span,html.day.sysui.touch .text-type .index-item-link.hover+.index-item-visual .index-item-text h2,html.day.sysui.touch .card-type .index-item-link.hover+.index-item-visual .index-item-text h2,html.day.sysui.touch #article.fc .download a.hover,html.day.sysui.touch #article.fc figure.fileblock a.hover *,html.day.sysui.touch #view-more-next.hover,html.day.sysui.touch #view-more-prev.hover,html.day.sysui.touch .tag-cloud li a:hover,html.day.sysui.touch .tt_more_preview_comments_text.hover,html.day.sysui.touch #export:not(.disabled) .export-link.hover + .export-visual.subscribe-on-tistory:after,html.day.sysui.touch.fixed-sidebar .sidebar-title-link.hover + .sidebar-title-inner p,html.day.sysui.touch.fixed-sidebar.original-module-color .sidebar a.hover,html.day.sysui.touch.fixed-sidebar.original-module-color .sidebar a.hover + .post-module-visual p,html.day.sysui.touch.fixed-sidebar.original-module-color .inner_header_layer .img_common_tistory.hover:before,html.day.sysui.touch.fixed-sidebar.original-module-color .sidebar button.hover:before,html.day.sysui.touch.fixed-sidebar.original-module-color .sidebar button.hover:after,html.day.sysui .comment-toggle[aria-expanded="true"]:before,html.day.sysui .comment-item.located .comment-desc:after{color:#74d5ff}html.day.sysui.no-touch #article.fc .footnote a:hover,html.day.sysui.no-touch #textRefresh:hover,html.day.sysui.no-touch #article.fc figure[data-ke-type="opengraph"] a:hover div.og-text p.og-title,html.day.sysui.no-touch #article.fc .another-category a:hover,html.day.sysui.no-touch #article.fc .txc-info a:hover:not(.compare),html.no-touch .close-sidebar:hover:before,html.no-touch .close-blog-info:hover:before,html.no-touch:not(.fixed-sidebar) .search-button:hover:before,html.no-touch:not(.fixed-sidebar) .sidebar-func-list a:hover:before,html.no-touch .lb-close:hover:before,html.no-touch .index-item-slider button:hover:before,html.no-touch .reply-wrap .comment-desc a:hover,html.no-touch:not(.fixed-sidebar) .inner_header_layer>.info_profile .link_setting:hover,html.no-touch:not(.fixed-sidebar) .inner_header_layer .img_common_tistory:hover:before,html.day.sysui.no-touch #article.fc button.btn_more:hover,html.day.sysui.no-touch #article.fc button.btn_less:hover,html.day.sysui.no-touch #article.fc div[data-ke-type="moreLess"] a.btn-toggle-moreless:hover,html.no-touch.page-cover-support.gh-top #tt-body-page .open-sidebar:hover:before,html.no-touch.page-cover-support.gh-top #tt-body-page .open-sidebar:hover:after,html.no-touch.page-cover-support.gh-top #tt-body-guestbook .open-sidebar:hover:before,html.no-touch.page-cover-support.gh-top #tt-body-guestbook .open-sidebar:hover:after,html.no-touch.page-cover-support #tt-body-page #global-header a:hover,html.no-touch.fixed-sidebar.page-cover-support #global-header .admin-func a:hover:before,html.day.sysui.no-touch #article.fc .download a:hover,html.day.sysui.no-touch #article.fc figure.fileblock a:hover,html.day.sysui.no-touch #article.fc figure.fileblock a:hover *,html.day.sysui.no-touch .tags-trail a:hover,html.day.sysui.no-touch #textRefresh:hover,html.day.sysui.no-touch .tag-cloud li a:hover,html.day.sysui.no-touch .alert.error a:hover,html.day.sysui.touch #article.fc .footnote a.hover,html.day.sysui.touch #textRefresh.hover,html.day.sysui.touch #article.fc figure[data-ke-type="opengraph"] a.hover div.og-text p.og-title,html.day.sysui.touch #article.fc .txc-info a.hover:not(.compare),html.day.sysui.touch #article.fc .another-category a.hover,html.touch .close-sidebar.hover:before,html.touch .close-blog-info.hover:before,html.touch:not(.fixed-sidebar) .search-button.hover:before,html.touch:not(.fixed-sidebar) .sidebar-func-list a.hover:before,html.touch .lb-close.hover:before,html.touch .index-item-slider button.hover:before,html.touch .reply-wrap .comment-desc a.hover,html.touch:not(.fixed-sidebar) .inner_header_layer>.info_profile .link_setting.hover,html.touch:not(.fixed-sidebar) .inner_header_layer .img_common_tistory.hover:before,html.day.sysui.touch #article.fc .download a.hover,html.day.sysui.touch #article.fc figure.fileblock a.hover,html.day.sysui.touch #article.fc figure.fileblock a.hover *,html.day.sysui.touch #article.fc button.btn_more.hover,html.day.sysui.touch #article.fc button.btn_less.hover,html.day.sysui.touch #article.fc div[data-ke-type="moreLess"] a.btn-toggle-moreless.hover,html.day.sysui.touch .tags-trail a.hover,html.day.sysui.touch #textRefresh.hover,html.day.sysui.touch .tag-cloud li a.hover,html.day.sysui.touch .alert.error a.hover,html.touch.page-cover-support.gh-top #tt-body-page .open-sidebar.hover:before,html.touch.page-cover-support.gh-top #tt-body-page .open-sidebar.hover:after,html.touch.page-cover-support.gh-top #tt-body-guestbook .open-sidebar.hover:before,html.touch.page-cover-support.gh-top #tt-body-guestbook .open-sidebar.hover:after,html.touch.page-cover-support #tt-body-page #global-header a.hover,html.touch.fixed-sidebar.page-cover-support #global-header .admin-func a.hover:before{color:#74d5ff!important}html.day.sysui.no-touch .fc-circle:hover:before,html.day.sysui.touch .fc-circle.hover:before{background-color:#74d5ff}}</style></head>
+<body id="tt-body-page">
+<script type="text/javascript">
+	(function() {
+		if (!window.T) {
+			window.T = {}
+		}
+		window.T.config = {"TOP_SSL_URL":"https:\/\/www.tistory.com","PREVIEW":false,"ROLE":"guest","PREV_PAGE":"\/73","NEXT_PAGE":"\/71","BLOG":{"isDormancy":false,"title":"\ube60\ub9ac\uc758 \ud0dd\uc2dc \uc6b4\uc804\uc0ac"},"NEED_COMMENT_LOGIN":false,"COMMENT_LOGIN_CONFIRM_MESSAGE":"","LOGIN_URL":"https:\/\/www.tistory.com\/auth\/login\/?redirectUrl=http%3A%2F%2Fgeonlee.tistory.com%2F72","DEFAULT_URL":"https:\/\/geonlee.tistory.com","USER":{"name":null,"homepage":null},"ROLE_GROUP":"visitor","SUBSCRIPTION":{"status":"none","isConnected":false,"isProcessing":false,"isPending":false,"isWait":false,"isNone":true},"IS_LOGIN":false,"HAS_BLOG":false,"TOP_URL":"https:\/\/www.tistory.com","JOIN_URL":"https:\/\/www.tistory.com\/member\/join"};
+		window.appInfo = {"domain":"tistory.com","topUrl":"https:\/\/www.tistory.com","loginUrl":"https:\/\/www.tistory.com\/auth\/login","logoutUrl":"https:\/\/www.tistory.com\/auth\/logout"};
+
+        window.initData = {};
+        
+	})();
+</script>
+
+<script type="text/javascript" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/common.js.다운로드"></script>
+<div style="margin:0; padding:0; border:none; background:none; float:none; clear:none; z-index:0"></div>
+<div id="measuring" hidden="">
+<div class="measuring"><div></div></div>
+</div>
+<div id="gpu-support" hidden="">
+<div class="gpu-support sidebar-support"></div>
+<div class="gpu-support blog-info-support"></div>
+</div>
+<nav class="scrollbar-support ready" id="global-navigation" aria-hidden="false">
+<div class="notice-go-to-index" hidden="">
+<span class="icon">이 영역을 누르면 첫 페이지로 이동</span>
+</div>
+<div class="gnb-inner">
+<a class="go-to-index no-text" href="https://geonlee.tistory.com/" role="button" aria-hidden="true">빠리의 택시 운전사 블로그의 첫 페이지로 이동</a>
+<div class="go-to-index-visual" aria-hidden="true">
+<div class="gnb-title">
+<p aria-hidden="true">빠리의 택시 운전사</p>
+
+</div>
+</div>
+<div class="gnb-left">
+<ul class="fc-list">
+<li><button class="fc-icon fc-appearance fc-button open-sidebar" data-func="open-sidebar">사이드바 열기</button></li>
+</ul>
+</div>
+<div class="gnb-center" aria-hidden="false">
+<div class="gnb-title">
+<a class="gnb-blog-link no-text fc-button" href="javascript:" data-func="go-to-top" role="button">페이지 맨 위로 올라가기</a>
+<p aria-hidden="true">파이썬을 이용해서 이진 탐색 트리 구현하기 🎄</p>
+<span aria-hidden="true">빠리의 택시 운전사</span>
+
+</div>
+</div>
+<div class="gnb-right">
+<button class="no-text fc-button fc-appearance blogger-toggle" data-func="open-blog-info">택시 운전사 블로그 정보 보기</button>
+<div class="gnb-blogger-icon" aria-hidden="true" style="background-image:url(//img1.daumcdn.net/thumb/R150x0/?scode=mtistory2&amp;fname=https://tistory4.daumcdn.net/tistory/1840821/attach/692980f4c4ba4594a45eade842c9bfa8)"></div>
+</div>
+</div>
+</nav><div class="progress-bar-wrap scrollbar-support" aria-hidden="false"><div class="progress-bar" style="transform: scaleX(0.849048);"></div></div>
+<main class="scrollbar-support" id="wrap" aria-hidden="false">
+
+<section>
+
+
+<div class="fc-index-width card-type">
+<div class="index-width-support">
+
+
+
+
+
+
+	<div class="toc toc-fixed"><ol class="toc-list "><li class="toc-list-item"><a href="https://geonlee.tistory.com/72#%EC%9D%B4%EC%A7%84-%ED%83%90%EC%83%89-%ED%8A%B8%EB%A6%AC-%EA%B5%AC%ED%98%84" class="toc-link node-name--H3 ">이진 탐색 트리 구현</a></li><li class="toc-list-item"><a href="https://geonlee.tistory.com/72#1.-%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%A0%95%EC%9D%98-%EB%B0%8F-%EC%B4%88%EA%B8%B0%ED%99%94" class="toc-link node-name--H3 ">1. 클래스 정의 및 초기화</a></li><li class="toc-list-item"><a href="https://geonlee.tistory.com/72#2.-%EC%82%BD%EC%9E%85-/-insert-method" class="toc-link node-name--H3 ">2. 삽입 / Insert Method</a></li><li class="toc-list-item"><a href="https://geonlee.tistory.com/72#3.-%ED%83%90%EC%83%89-/-find-method" class="toc-link node-name--H3 ">3. 탐색 / Find Method</a></li><li class="toc-list-item is-active-li"><a href="https://geonlee.tistory.com/72#4.-%EC%82%AD%EC%A0%9C-/-delete-method" class="toc-link node-name--H3  is-active-link">4. 삭제 / Delete Method</a></li><li class="toc-list-item"><a href="https://geonlee.tistory.com/72#%EA%B2%B0%EA%B3%BC" class="toc-link node-name--H3 ">결과</a></li><li class="toc-list-item"><a href="https://geonlee.tistory.com/72#%EC%B0%B8%EA%B3%A0" class="toc-link node-name--H3 ">참고</a></li></ol></div>
+<article>
+<header id="global-header" style="min-height: 1254px;">
+
+<div class="page-cover" aria-hidden="true" style="display: block;">
+<div class="base-page-cover" style="background-image: url(&quot;//img1.daumcdn.net/thumb/R48x0/?scode=mtistory2&amp;fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99AD154D5C5C50D932&quot;);"></div>
+<div class="parent-page-cover" style="background-image: url(&quot;//img1.daumcdn.net/thumb/R48x0/?scode=mtistory2&amp;fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99AD154D5C5C50D932&quot;);">
+<div class="small-cover" style="background-image: url(&quot;//img1.daumcdn.net/thumb/R1024x0/?scode=mtistory2&amp;fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99AD154D5C5C50D932&quot;);"></div>
+<div class="medium-cover" style="background-image: url(&quot;//img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99AD154D5C5C50D932&quot;);"></div>
+<div class="large-cover" style="background-image: url(&quot;//img1.daumcdn.net/thumb/R1920x0/?scode=mtistory2&amp;fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99AD154D5C5C50D932&quot;);"></div>
+<div class="exlarge-cover" style="background-image: url(&quot;//img1.daumcdn.net/thumb/R2560x0/?scode=mtistory2&amp;fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99AD154D5C5C50D932&quot;);"></div>
+</div>
+</div>
+
+<div class="gh-text">
+<h1 class="gh-headline">파이썬을 이용해서 이진 탐색 트리 구현하기 🎄</h1>
+<ul class="fc-list">
+<li class="digit" role="text" aria-label="2019년 02월 08일 01시 10분에 작성된 글."><time datetime="2019-02-08T01:10">2019.02.08 01:10</time></li>
+<li><a class="fade-link" href="https://geonlee.tistory.com/category/Language/Python" aria-label="Language/Python">Language/Python</a></li>
+</ul>
+</div>
+
+<div class="header-height" aria-hidden="true"></div>
+</header>
+<div class="page-limit-width justify edge-support procode hljs-line hljs-stripe hljs-expand fc useless-margin" id="article">
+
+<div class="author-inner">
+<address>글 작성자: 택시 운전사</address>
+</div>
+
+            <div class="revenue_unit_wrap ">
+               <div class="revenue_unit_item adsense  responsive">
+                    <div class="revenue_unit_info">반응형</div>
+                    <script async="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/f.txt"></script>
+                    <ins class="adsbygoogle" style="display:block;" data-ad-host="ca-host-pub-9691043933427338" data-ad-client="ca-pub-9994255438328666" data-ad-format="auto"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({}); </script>
+               </div>
+            </div><p>
+<script src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/f.txt"></script>
+</p>
+<p>&nbsp;</p>
+<p>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</p>
+<p>이진 트리(Binary Tree)는 최대 두 개의 자식 노드를 가진느 트리 형태의 자료구조로, 단순히 값을 저장하는 용도보다는 효율적인 탐색 혹은 정렬을 위하여 사용됩니다. 이진 탐색 트리(Binary Search Tree)를 사용하여 주어진 값 혹은 이보다 작거나 큰 값들을 평균 <code>O(logn)</code>의 시간 복잡도로 찾을 수 있으며, 이진 트리의 한 종류인 힙(heap)을 사용한 힙 정렬(heap)은 <code>O(nlogn)</code>의 시간 복잡도를 가집니다.</p>
+<h3 id="이진-탐색-트리-구현">이진 탐색 트리 구현</h3>
+<p>이진 탐색 트리(Binary Search Tree)는 이진 트리의 특수한 케이스 중 하나입니다. 이진 트리 중 모든 노드에 대해 왼쪽 자식 노드들의 값이 현재 노드 값보다 작거나 같으며, 오른쪽 자식 노드들의 값이 현재 노드의 값보다 크다는 조건을 만족하면 이진 탐색 트리가 됩니다.</p>
+<p>아래 그림은 <code>[21, 28, 14, 32, 25, 18, 11, 30, 19, 15]</code>의 순서로 주어진 값을 통해 이진 탐색 트리를 구축하는 과정을 보여줍니다. 맨 처음 입력된 값은 뿌리(Root) 노드이며, 그 다음부터는 입력값과 노드 간의 대소관계에 따라 입력값의 노드 위치가 결정됩니다.</p>
+<figure class="imageblock alignCenter" width="400" height="255" data-origin-width="0" data-origin-height="0" data-ke-mobilestyle="widthContent"><span data-url="https://t1.daumcdn.net/cfile/tistory/99AD154D5C5C50D932" data-lightbox="lightbox" data-alt=""><img src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/99AD154D5C5C50D932" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99AD154D5C5C50D932" width="400" height="255" data-origin-width="0" data-origin-height="0" data-ke-mobilestyle="widthContent"></span></figure>
+<p>아래 그림은 위와 같이 만든 이진 탐색 트리에서 <code>27</code>을 찾는 과정을 보여줍니다. 이진 탐색 트리(Binary Search Tree)가 정렬된 배열보다 효과적으로 원하는 값을 찾는 것을 확인할 수 있습니다.</p>
+<figure class="imageblock alignCenter" width="450" height="378" data-origin-width="0" data-origin-height="0" data-ke-mobilestyle="widthContent"><span data-url="https://t1.daumcdn.net/cfile/tistory/99631E4B5C5C511D38" data-lightbox="lightbox" data-alt=""><img src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/99631E4B5C5C511D38" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99631E4B5C5C511D38" width="450" height="378" data-origin-width="0" data-origin-height="0" data-ke-mobilestyle="widthContent"></span></figure>
+<h3 id="1.-클래스-정의-및-초기화">1. 클래스 정의 및 초기화</h3>
+<p>이진 탐색 트리를 구현하려면, 먼저 <code>Node</code> 클래스를 정의해야 합니다. <code>Node</code> 클래스는 노드값인 <code>self.data</code>와 왼쪽/오른쪽의 노드인 <code>self.left</code>, <code>self.right</code> 총 세 개의 속성을 가집니다. 초기화할 때는 데이터 값만 주어지고 좌우 노드는 비어있습니다.</p>
+<pre class="ruby procode-wrap"><code class="hljs"><table class="hljs-ln"><tbody><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="1"><div class="hljs-ln-n" data-line-number="1"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="1"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span>(<span class="hljs-title">object</span>):</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="2"><div class="hljs-ln-n" data-line-number="2"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="2">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(<span class="hljs-keyword">self</span>, data)</span></span>:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="3"><div class="hljs-ln-n" data-line-number="3"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="3">        <span class="hljs-keyword">self</span>.data = data</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="4"><div class="hljs-ln-n" data-line-number="4"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="4">        <span class="hljs-keyword">self</span>.left = <span class="hljs-keyword">self</span>.right = None</td></tr></tbody></table></code></pre>
+<p>이제 <code>Node</code> 클래스를 사용해 이진 탐색 트리 클래스인 <code>BinarySearchTree</code>를 구현해봅시다. 처음에는 비어 있는 트리로 초기화합니다.</p>
+<pre class="ruby procode-wrap"><code class="hljs"><table class="hljs-ln"><tbody><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="1"><div class="hljs-ln-n" data-line-number="1"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="1"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySearchTree</span>(<span class="hljs-title">object</span>):</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="2"><div class="hljs-ln-n" data-line-number="2"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="2">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(<span class="hljs-keyword">self</span>)</span></span>:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="3"><div class="hljs-ln-n" data-line-number="3"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="3">        <span class="hljs-keyword">self</span>.root = None</td></tr></tbody></table></code></pre>
+<p>이제 여기에 원소를 추가, 삭제, 탐색할 수 있도록 <code>insert()</code>, <code>delete()</code>, <code>find()</code> Method를 추가해야합니다.</p>
+<h3 id="2.-삽입-/-insert-method">2. 삽입 / Insert Method</h3>
+<p>BinarySearchTree에 <code>insert()</code> Method를 구현하여 트리에 새 원소를 추가할 수 있도록 해봅시다. 재귀를 아용해서 구현하면 간단합니다. 새로 추가할 원소의 값을 현재 노드의 값과 비교하여 왼쪽/오른쪽 중 알맞은 위치로 노드를 옮겨가면서 삽입 위치를 확인합니다.</p>
+<pre class="lasso procode-wrap"><code class="hljs python"><table class="hljs-ln"><tbody><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="1"><div class="hljs-ln-n" data-line-number="1"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="1"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySearchTree</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="2"><div class="hljs-ln-n" data-line-number="2"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="2">    ...</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="3"><div class="hljs-ln-n" data-line-number="3"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="3">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">insert</span>(<span class="hljs-params">self, data</span>):</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="4"><div class="hljs-ln-n" data-line-number="4"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="4">        self.root = self._insert_value(self.root, data)</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="5"><div class="hljs-ln-n" data-line-number="5"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="5">        <span class="hljs-keyword">return</span> self.root <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="6"><div class="hljs-ln-n" data-line-number="6"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="6"> </td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="7"><div class="hljs-ln-n" data-line-number="7"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="7">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_insert_value</span>(<span class="hljs-params">self, node, data</span>):</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="8"><div class="hljs-ln-n" data-line-number="8"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="8">        <span class="hljs-keyword">if</span> node <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="9"><div class="hljs-ln-n" data-line-number="9"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="9">            node = Node(data)</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="10"><div class="hljs-ln-n" data-line-number="10"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="10">        <span class="hljs-keyword">else</span>:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="11"><div class="hljs-ln-n" data-line-number="11"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="11">            <span class="hljs-keyword">if</span> data &lt;= node.data:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="12"><div class="hljs-ln-n" data-line-number="12"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="12">                node.left = self._insert_value(node.left, data)</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="13"><div class="hljs-ln-n" data-line-number="13"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="13">            <span class="hljs-keyword">else</span>:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="14"><div class="hljs-ln-n" data-line-number="14"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="14">                node.right = self._insert_value(node.right, data)</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="15"><div class="hljs-ln-n" data-line-number="15"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="15">        <span class="hljs-keyword">return</span> node</td></tr></tbody></table></code></pre>
+<h3 id="3.-탐색-/-find-method">3. 탐색 / Find Method</h3>
+<p>원하는 값의 존재유무를 확인할 수 있도록, <code>find()</code> Method를 구현해봅시다. 이 역시 재귀와 값의 대소관계 비교를 통해 구현할 수 있습니다.</p>
+<pre class="python procode-wrap"><code class="hljs"><table class="hljs-ln"><tbody><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="1"><div class="hljs-ln-n" data-line-number="1"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="1"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySearchTree</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="2"><div class="hljs-ln-n" data-line-number="2"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="2">    ...</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="3"><div class="hljs-ln-n" data-line-number="3"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="3">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find</span>(<span class="hljs-params">self, key</span>):</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="4"><div class="hljs-ln-n" data-line-number="4"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="4">        <span class="hljs-keyword">return</span> self._find_value(self.root, key)</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="5"><div class="hljs-ln-n" data-line-number="5"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="5"> </td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="6"><div class="hljs-ln-n" data-line-number="6"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="6">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_find_value</span>(<span class="hljs-params">self, root, key</span>):</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="7"><div class="hljs-ln-n" data-line-number="7"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="7">        <span class="hljs-keyword">if</span> root <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> root.data == key:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="8"><div class="hljs-ln-n" data-line-number="8"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="8">            <span class="hljs-keyword">return</span> root <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="9"><div class="hljs-ln-n" data-line-number="9"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="9">        <span class="hljs-keyword">elif</span> key &lt; root.data:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="10"><div class="hljs-ln-n" data-line-number="10"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="10">            <span class="hljs-keyword">return</span> self._find_value(root.left, key)</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="11"><div class="hljs-ln-n" data-line-number="11"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="11">        <span class="hljs-keyword">else</span>:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="12"><div class="hljs-ln-n" data-line-number="12"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="12">            <span class="hljs-keyword">return</span> self._find_value(root.right, key)</td></tr></tbody></table></code></pre>
+<h3 id="4.-삭제-/-delete-method">4. 삭제 / Delete Method</h3>
+<p>삭제는 다른 Method에 비해 비교적 까다롭습니다.</p>
+<p>삭제할 Node의 자식이 없으면 문제가 없지만, 자식이 하나인 경우엔 자식 노드를 삭제한 노드 위치로 가져오면 됩니다. 하지만, 삭제할 노드의 자식이 두 개일 때는 어떤 자식 노드를 어떻게 가져와야 할까요?</p>
+<p>왼쪽 서브 트리와 오른쪽 서브 트리를 각각 A, B라고 했을 때, B에서 가장 왼쪽 아래에 위치한 자손을 가져온다. 이 원소는 A의 모든 원소들보다는 크면서, B의 나머지 원소보다 작기 때문에 해당 노드를 가져오는 것입니다.</p>
+<pre class="crmsh procode-wrap"><code class="hljs python"><table class="hljs-ln"><tbody><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="1"><div class="hljs-ln-n" data-line-number="1"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="1"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySearchTree</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="2"><div class="hljs-ln-n" data-line-number="2"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="2">    ...</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="3"><div class="hljs-ln-n" data-line-number="3"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="3">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">delete</span>(<span class="hljs-params">self, key</span>):</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="4"><div class="hljs-ln-n" data-line-number="4"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="4">        self.root, deleted = self._delete_value(self.root, key)</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="5"><div class="hljs-ln-n" data-line-number="5"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="5">        <span class="hljs-keyword">return</span> deleted</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="6"><div class="hljs-ln-n" data-line-number="6"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="6"> </td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="7"><div class="hljs-ln-n" data-line-number="7"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="7">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_delete_value</span>(<span class="hljs-params">self, node, key</span>):</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="8"><div class="hljs-ln-n" data-line-number="8"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="8">        <span class="hljs-keyword">if</span> node <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="9"><div class="hljs-ln-n" data-line-number="9"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="9">            <span class="hljs-keyword">return</span> node, <span class="hljs-literal">False</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="10"><div class="hljs-ln-n" data-line-number="10"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="10"> </td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="11"><div class="hljs-ln-n" data-line-number="11"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="11">        deleted = <span class="hljs-literal">False</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="12"><div class="hljs-ln-n" data-line-number="12"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="12">        <span class="hljs-keyword">if</span> key == node.data:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="13"><div class="hljs-ln-n" data-line-number="13"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="13">            deleted = <span class="hljs-literal">True</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="14"><div class="hljs-ln-n" data-line-number="14"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="14">            <span class="hljs-keyword">if</span> node.left <span class="hljs-keyword">and</span> node.right:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="15"><div class="hljs-ln-n" data-line-number="15"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="15">                <span class="hljs-comment"># replace the node to the leftmost of node.right</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="16"><div class="hljs-ln-n" data-line-number="16"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="16">                parent, child = node, node.right</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="17"><div class="hljs-ln-n" data-line-number="17"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="17">                <span class="hljs-keyword">while</span> child.left <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="18"><div class="hljs-ln-n" data-line-number="18"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="18">                    parent, child = child, child.left</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="19"><div class="hljs-ln-n" data-line-number="19"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="19">                child.left = node.left</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="20"><div class="hljs-ln-n" data-line-number="20"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="20">                <span class="hljs-keyword">if</span> parent != node:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="21"><div class="hljs-ln-n" data-line-number="21"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="21">                    parent.left = child.right</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="22"><div class="hljs-ln-n" data-line-number="22"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="22">                    child.right = node.right</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="23"><div class="hljs-ln-n" data-line-number="23"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="23">                node = child</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="24"><div class="hljs-ln-n" data-line-number="24"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="24">            <span class="hljs-keyword">elif</span> node.left <span class="hljs-keyword">or</span> node.right:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="25"><div class="hljs-ln-n" data-line-number="25"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="25">                node = node.left <span class="hljs-keyword">or</span> node.right</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="26"><div class="hljs-ln-n" data-line-number="26"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="26">            <span class="hljs-keyword">else</span>:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="27"><div class="hljs-ln-n" data-line-number="27"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="27">                node = <span class="hljs-literal">None</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="28"><div class="hljs-ln-n" data-line-number="28"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="28">        <span class="hljs-keyword">elif</span> key &lt; node.data:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="29"><div class="hljs-ln-n" data-line-number="29"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="29">            node.left, deleted = self._delete_value(node.left, key)</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="30"><div class="hljs-ln-n" data-line-number="30"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="30">        <span class="hljs-keyword">else</span>:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="31"><div class="hljs-ln-n" data-line-number="31"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="31">            node.right, deleted = self._delete_value(node.right, key)</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="32"><div class="hljs-ln-n" data-line-number="32"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="32">        <span class="hljs-keyword">return</span> node, deleted</td></tr></tbody></table></code></pre>
+<p>이진 트리의 좌우 균형이 맞는다면 탐색, 삽입, 삭제의 시간복잡도가 <code>O(logn)</code>입니다. 그러나 이진 탐색 트리는 정렬된 데이터에는 취약합니다. 오름차순이든 내림차순이든 정렬된 데이터가 입력되면 한 쪽으로 치우친(<code>skewed</code>) 트리가 만들어집니다. 이 때, 최악의 경우 모든 데이터를 살펴야 할 수도 있어 시간복잡도가 <code>O(n)</code>이 됩니다.</p>
+<h3 id="결과">결과</h3>
+<p>예제를 통해 구현 결과를 확인할 수 있습니다.</p>
+<pre class="golo procode-wrap"><code class="hljs coffeescript"><table class="hljs-ln"><tbody><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="1"><div class="hljs-ln-n" data-line-number="1"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="1">array = [<span class="hljs-number">40</span>, <span class="hljs-number">4</span>, <span class="hljs-number">34</span>, <span class="hljs-number">45</span>, <span class="hljs-number">14</span>, <span class="hljs-number">55</span>, <span class="hljs-number">48</span>, <span class="hljs-number">13</span>, <span class="hljs-number">15</span>, <span class="hljs-number">49</span>, <span class="hljs-number">47</span>]</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="2"><div class="hljs-ln-n" data-line-number="2"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="2"> </td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="3"><div class="hljs-ln-n" data-line-number="3"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="3">bst = BinarySearchTree()</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="4"><div class="hljs-ln-n" data-line-number="4"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="4"><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> array:</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="5"><div class="hljs-ln-n" data-line-number="5"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="5">    bst.insert(x)</td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="6"><div class="hljs-ln-n" data-line-number="6"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="6"> </td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="7"><div class="hljs-ln-n" data-line-number="7"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="7"><span class="hljs-comment"># Find</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="8"><div class="hljs-ln-n" data-line-number="8"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="8"><span class="hljs-built_in">print</span>(bst.find(<span class="hljs-number">15</span>)) <span class="hljs-comment"># True</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="9"><div class="hljs-ln-n" data-line-number="9"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="9"><span class="hljs-built_in">print</span>(bst.find(<span class="hljs-number">17</span>)) <span class="hljs-comment"># False</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="10"><div class="hljs-ln-n" data-line-number="10"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="10"> </td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="11"><div class="hljs-ln-n" data-line-number="11"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="11"><span class="hljs-comment"># Delete</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="12"><div class="hljs-ln-n" data-line-number="12"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="12"><span class="hljs-built_in">print</span>(bst.<span class="hljs-keyword">delete</span>(<span class="hljs-number">55</span>)) <span class="hljs-comment"># True</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="13"><div class="hljs-ln-n" data-line-number="13"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="13"><span class="hljs-built_in">print</span>(bst.<span class="hljs-keyword">delete</span>(<span class="hljs-number">14</span>)) <span class="hljs-comment"># True</span></td></tr><tr><td class="hljs-ln-line hljs-ln-numbers" data-line-number="14"><div class="hljs-ln-n" data-line-number="14"></div></td><td class="hljs-ln-line hljs-ln-code" data-line-number="14"><span class="hljs-built_in">print</span>(bst.<span class="hljs-keyword">delete</span>(<span class="hljs-number">11</span>)) <span class="hljs-comment"># False</span></td></tr></tbody></table></code></pre>
+<p>그럼 트리 안에 어떤 원소들이 담겨 있는 지 어떻게 확인할 수 있을까요?</p>
+<p>트리는 그 구조상 저장된 원소들을 하나씩 살펴보기 위해 별도의 순회 알고리즘이 필요합니다. 다음 포스트에선 트리의 순회 알고리즘에 대해서 살펴보겠습니다.</p>
+<h3 id="참고">참고</h3>
+<ul>
+<li><a href="http://ceadserv1.nku.edu/longa//classes/mat385_resources/docs/traversal.htm">http://ceadserv1.nku.edu/longa//classes/mat385_resources/docs/traversal.htm</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Binary_tree">https://en.wikipedia.org/wiki/Binary_tree</a></li>
+<li><a href="https://codereview.stackexchange.com/questions/175856/python-binary-search-tree">https://codereview.stackexchange.com/questions/175856/python-binary-search-tree</a></li>
+<li><a href="https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/">https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/</a></li>
+</ul>            <div class="revenue_unit_wrap ">
+               <div class="revenue_unit_item adsense  responsive">
+                    <div class="revenue_unit_info">반응형</div>
+                    <script async="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/f.txt"></script>
+                    <ins class="adsbygoogle" style="display:block;" data-ad-host="ca-host-pub-9691043933427338" data-ad-client="ca-pub-9994255438328666" data-ad-format="auto"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({}); </script>
+               </div>
+            </div><div class="container_postbtn #post_button_group has-subscriptionbtn has-morebtn has-likebtn has-ccl">
+    <div class="postbtn_like">
+        
+<script>
+    window.ReactionButtonType = 'reaction';
+    window.ReactionApiUrl = '//geonlee.tistory.com/reaction';
+    window.ReactionReqBody = {
+        entryId: 72    }
+</script>
+<div class="wrap_btn" id="reaction-72"><button class="btn_post uoc-icon"><div class="uoc-icon"><span class="ico_postbtn ico_like">좋아요</span><span class="txt_like uoc-count">8</span></div></button></div>
+<script src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/reaction-button-container.min.js.다운로드"></script>
+        
+                
+    </div><div class="btn_more_inner"><button class="icon post_more" aria-label="이 글의 옵션 토글"><span aria-hidden="true">옵션 토글</span></button><div class="more-field" aria-hidden="true"><button class="icon abuse-report" aria-label="이 글을 티스토리에 신고하기"><span aria-hidden="true">신고하기</span></button></div></div>
+    <button type="button" class="btn_menu_toolbar btn_subscription  #subscribe" data-blog-id="1840821" data-url="https://geonlee.tistory.com/72" data-device="web_pc">
+    <em class="txt_state">구독하기</em>
+    <strong class="txt_tool_id">빠리의 택시 운전사</strong>
+    <span class="img_common_tistory ico_check_type1"></span>
+</button>
+    <div class="postbtn_ccl" data-ccl-type="3">
+    <a href="https://creativecommons.org/licenses/by/4.0/deed.ko" target="_blank" class="link_ccl no-text" rel="license" aria-label="이 글은 
+        
+    본 저작자 표시 규칙 하에 배포할 수 있습니다. 자세한 내용은 크리에이티브 커먼즈 라이선스를 확인하세요." role="button">이 글은 
+        
+    본 저작자 표시 규칙 하에 배포할 수 있습니다. 자세한 내용은 Creative Commons 라이선스를 확인하세요.</a>
+<div class="ccl-icons-group" aria-hidden="true"><div class="cc-logo no-text icon">Creative Commons</div><div class="cc-by no-text icon">본 저작자 표시</div></div></div>
+    <!--
+<rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <Work rdf:about="">
+        <license rdf:resource="http://creativecommons.org/licenses/by-fr/2.0/kr/" />
+    </Work>
+    <License rdf:about="http://creativecommons.org/licenses/by-fr/">
+        <permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+        <permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+        <requires rdf:resource="http://web.resource.org/cc/Notice"/>
+        <requires rdf:resource="http://web.resource.org/cc/Attribution"/>
+                <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
+                    </License>
+</rdf:RDF>
+-->
+</div><div class="another-category">
+<h4 id="&#39;language &gt; python&#39;-카테고리의-다른-글">'<a href="https://geonlee.tistory.com/category/Language">Language</a>&nbsp;&gt;&nbsp;<a href="https://geonlee.tistory.com/category/Language/Python">Python</a>' 카테고리의 다른 글</h4>
+<table>
+<tbody><tr>
+<th>
+<a href="https://geonlee.tistory.com/78?category=318965">파이썬을 이용해서 순회 알고리즘을 구현해보자 ♻ (feat. DFS, BFS)</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2019.02.08</td>
+</tr>
+<tr>
+<th>
+<a href="https://geonlee.tistory.com/72?category=318965" class="current">파이썬을 이용해서 이진 탐색 트리 구현하기 🎄</a>&nbsp;&nbsp;<span>(2)</span>
+</th>
+<td>
+2019.02.08</td>
+</tr>
+<tr>
+<th>
+<a href="https://geonlee.tistory.com/69?category=318965">[Python] itertools를 이용한 조합</a>&nbsp;&nbsp;<span>(2)</span>
+</th>
+<td>
+2019.02.07</td>
+</tr>
+<tr>
+<th>
+<a href="https://geonlee.tistory.com/58?category=318965">[Python] Dictionary(사전) 자료형 : { k : v }의 sort(정렬)</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2019.02.05</td>
+</tr>
+<tr>
+<th>
+<a href="https://geonlee.tistory.com/46?category=318965">[Python] 정규 표현식(Regular Expression)</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2019.02.02</td>
+</tr>
+</tbody></table></div>
+</div>
+
+<div class="tags-trail page-limit-width"><div><a href="https://geonlee.tistory.com/tag/binarytree" rel="tag" role="button" aria-label="binarytree 태그">binarytree</a>
+<a href="https://geonlee.tistory.com/tag/PYTHON" rel="tag" role="button" aria-label="PYTHON 태그">PYTHON</a>
+<a href="https://geonlee.tistory.com/tag/%EC%9D%B4%EC%A7%84%20%ED%83%90%EC%83%89%20%ED%8A%B8%EB%A6%AC" rel="tag" role="button" aria-label="이진 탐색 트리 태그">이진 탐색 트리</a>
+<a href="https://geonlee.tistory.com/tag/%ED%8C%8C%EC%9D%B4%EC%8D%AC" rel="tag" role="button" aria-label="파이썬 태그">파이썬</a></div></div>
+
+<div class="page-stroke article-stroke"></div>
+<nav class="activity-func">
+<ul class="fc-list">
+<li><button class="fc-appearance fc-button fade-link show-comments-button" data-func="show-comments" aria-controls="comments" aria-selected="false">댓글<span id="commentCount72_0"><span class="number digit" data-count="(2)" aria-hidden="true"></span></span></button></li>
+<li><button class="fc-appearance fc-button fade-link show-export-button" data-func="show-export" aria-controls="export" aria-selected="false">공유하기</button></li>
+<li><button class="fc-appearance fc-button fade-link show-related-button" data-func="show-related" aria-controls="related" aria-selected="true">다른 글</button></li>
+</ul>
+</nav>
+<div class="activity-content-wrap">
+<section class="activity-content" id="comments" hidden="">
+<h2 class="visuallyhidden-content">댓글</h2>
+<div class="comments reversed">
+<div id="entry72Comment">
+
+<button class="no-text transparent-comment-active" style="display:none" aria-hidden="true" aria-expanded="false">이 댓글의 메뉴 토글</button>
+<ol class="fc-list comment-list">
+
+<li class="comment-item" id="comment5583263">
+<div class="comment-wrap comment-bubble rp_general">
+<p class="icon comment-desc">
+최악의 경우 O(N^2)으로 수정이 필요한것같네용~
+</p>
+<div class="comment-avatar" style="background-image:url(//img1.daumcdn.net/thumb/R110x0/?scode=mtistory2&amp;fname=https://t1.daumcdn.net/tistory_admin/blog/admin/profile_default_04.png)" aria-hidden="true"></div>
+<div class="comment-info">
+<button class="fc-icon fc-appearance comment-toggle" aria-expanded="false">이 댓글의 메뉴 토글</button>
+<div class="comment-username">ㅁㄴㅇ</div>
+<div class="comment-date digit">2019.10.12 03:01</div>
+</div>
+<nav class="comment-control" aria-hidden="true">
+<ul class="fc-list">
+<li>
+<a class="fc-icon comment-function reply-comment" href="javascript:" onclick="commentComment(5583263); return false" role="button">댓글에 댓글 작성하기</a>
+</li>
+<li>
+<a class="fc-icon comment-function modify-comment" href="javascript:" onclick="deleteComment(5583263);return false" role="button">댓글 편집 또는 삭제</a>
+</li>
+<li>
+<a class="fc-icon comment-function report-comment" href="javascript:" role="button">댓글 신고…</a>
+</li>
+</ul>
+</nav>
+</div>
+
+<ul class="fc-list">
+
+<li class="comment-item" id="comment5586268">
+<div class="reply-wrap comment-bubble rp_admin">
+<p class="icon comment-desc">
+skewed binary tree의 탐색, 삽입, 삭제 시간복잡도는 최악의 경우 linear array와 같기 때문에 O(n)의 복잡도를 갖습니다.
+</p>
+<div class="comment-avatar" style="background-image:url(//img1.daumcdn.net/thumb/R110x0/?scode=mtistory2&amp;fname=https://img1.daumcdn.net/thumb/C100x100/?scode=mtistory2&amp;fname=https%3A%2F%2Ftistory4.daumcdn.net%2Ftistory%2F1840821%2Fattach%2F692980f4c4ba4594a45eade842c9bfa8)" aria-hidden="true"></div>
+<div class="comment-info">
+<button class="fc-icon fc-appearance comment-toggle" aria-expanded="false">이 댓글의 메뉴 토글</button>
+<div class="comment-date digit">2019.10.15 15:21 <a href="https://geonlee.tistory.com/toolbar/popup/abuseReport/?entryId=72&amp;commentId=5586268" onclick="window.open(this.href, &#39;ThisBlogReportPopup&#39;, &#39;width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no&#39;); return false;">신고</a></div>
+<div class="comment-username"><a href="https://geonlee.tistory.com/" onclick="return openLinkInNewWindow(this)">택시 운전사</a><span class="tistoryProfileLayerTrigger" onclick="TistoryProfile.show(event, this, {&quot;blogId&quot;:&quot;1840821&quot;,&quot;title&quot;:&quot;\ube60\ub9ac\uc758 \ud0dd\uc2dc \uc6b4\uc804\uc0ac&quot;,&quot;url&quot;:&quot;https:\/\/geonlee.tistory.com&quot;,&quot;nickname&quot;:&quot;\ud0dd\uc2dc \uc6b4\uc804\uc0ac&quot;,&quot;items&quot;:[{&quot;title&quot;:&quot;Github&quot;,&quot;url&quot;:&quot;https:\/\/github.com\/dl0312&quot;,&quot;d&quot;:&quot;0&quot;,&quot;info&quot;:&quot;&quot;,&quot;iconurl&quot;:&quot;https:\/\/github.com\/favicon.ico&quot;},{&quot;title&quot;:&quot;facebook&quot;,&quot;url&quot;:&quot;https:\/\/www.facebook.com\/thisisismyname&quot;,&quot;d&quot;:&quot;0&quot;,&quot;info&quot;:&quot;&quot;,&quot;iconurl&quot;:&quot;https:\/\/facebook.com\/favicon.ico&quot;},{&quot;title&quot;:&quot;instagram&quot;,&quot;url&quot;:&quot;https:\/\/www.instagram.com\/geon_this\/&quot;,&quot;d&quot;:&quot;0&quot;,&quot;info&quot;:&quot;&quot;,&quot;iconurl&quot;:&quot;https:\/\/www.instagram.com\/favicon.ico&quot;}],&quot;isSubscriber&quot;:false,&quot;device&quot;:&quot;web_pc&quot;}); return false;"></span></div>
+</div>
+<nav class="comment-control" aria-hidden="true">
+<ul class="fc-list">
+<li>
+<a class="fc-icon comment-function report-comment" href="javascript:" role="button">댓글 신고…</a>
+</li>
+<li>
+<a class="fc-icon comment-function modify-comment" href="javascript:" onclick="deleteComment(5586268); return false;" role="button">댓글 편집 또는 삭제</a>
+</li>
+</ul>
+</nav>
+</div>
+</li>
+
+</ul>
+
+</li>
+
+</ol>
+
+<form method="post" action="https://geonlee.tistory.com/comment/add/72" onsubmit="return false" style="margin: 0">
+<div class="comment-form-wrap comment-wrap">
+<div class="icon comment-desc">
+<textarea class="fc-appearance" id="comment-textarea" style="height:108px" name="comment" required=""></textarea>
+<div class="comment-field">
+<label class="comment-field-blank" style="display:none" for="comment-textarea" aria-hidden="true"></label>
+
+
+<fieldset class="comment-guest-field" autocomplete="off" required="">
+<legend>방문자 정보</legend>
+<div class="username-field">
+<input class="fc-appearance" id="comment-username-field" type="text" name="name" value="">
+<label for="comment-username-field" autocomplete="off">이름</label>
+</div>
+<div class="password-field">
+<input class="fc-appearance" id="comment-password-field" type="password" name="password">
+<label for="comment-password-field" autocomplete="off">암호</label>
+</div>
+</fieldset>
+
+<div class="protect-button">
+<input id="protect-comment" type="checkbox" name="secret">
+<label class="fc-icon" for="protect-comment" role="checkbox">운영자에게만 공개</label>
+</div>
+
+<button class="submit-comment fc-icon fc-appearance" onclick="addComment(this, 72); return false;">작성하기</button>
+</div>
+</div>
+<div class="comment-avatar icon" aria-hidden="true"></div>
+</div>
+</form>
+</div><script type="text/javascript">loadedComments[72]=true;findFragmentAndHighlight(72)</script>
+</div>
+</section>
+<section class="activity-content" id="export" hidden="">
+<h2 class="visuallyhidden-content">이 글 공유하기</h2>
+<div class="export-content">
+<ul class="fc-list">
+<li class="export-item subscribe-item">
+<a class="export-link no-text fc-subscribe btn_subscription" href="javascript:" role="button" aria-label="이 블로그 구독하기" data-blog-id="1840821" data-url="https://geonlee.tistory.com" data-device="web_pc"><span class="txt_state">구독하기</span></a>
+<div class="export-visual icon subscribe-on-tistory fc-subscribe btn_subscription" hidden="" data-blog-id="1840821" data-url="https://geonlee.tistory.com" data-device="web_pc">
+<p class="txt_state">구독하기</p>
+</div>
+</li>
+<li class="export-item">
+<a class="export-link no-text" href="javascript:" data-export="kakaotalk" role="button" aria-label="카카오톡 메신저로 메시지 보내기">카카오톡</a>
+<div class="export-visual icon kakaotalk" hidden="">
+<p>카카오톡</p>
+</div>
+</li>
+<li class="export-item mobile">
+<a class="export-link no-text" href="javascript:" data-export="line" role="button" aria-label="라인 메신저 앱으로 메시지 보내기">라인</a>
+<div class="export-visual icon line-app" hidden="">
+<p>라인</p>
+</div>
+</li>
+<li class="export-item">
+<a class="export-link no-text" href="javascript:" data-export="twitter" role="button" aria-label="트위터에 트윗하기">트위터</a>
+<div class="export-visual icon twitter" hidden="">
+<p>트위터</p>
+</div>
+</li>
+<li class="export-item">
+<a class="export-link no-text" href="javascript:" data-export="facebook" role="button" aria-label="페이스북 담벼락에 올리기">Facebook</a>
+<div class="export-visual icon facebook" hidden="">
+<p>Facebook</p>
+</div>
+</li>
+<li class="export-item">
+<a class="export-link no-text" href="javascript:" data-export="kakaostory" role="button" aria-label="카카오스토리에 공유하기">카카오스토리</a>
+<div class="export-visual icon kakaostory" hidden="">
+<p>카카오스토리</p>
+</div>
+</li>
+<li class="export-item">
+<a class="export-link no-text" href="javascript:" data-export="band" role="button" aria-label="네이버 밴드에 내보내기">밴드</a>
+<div class="export-visual icon band-app" hidden="">
+<p>밴드</p>
+</div>
+</li>
+<li class="export-item">
+<a class="export-link no-text" href="javascript:" data-export="naver" role="button" aria-label="네이버 블로그를 포함하여 네이버가 운영하는 서비스에 내보내기">네이버 블로그</a>
+<div class="export-visual icon naver-app" hidden="">
+<p>네이버 블로그</p>
+</div>
+</li>
+<li class="export-item">
+<a class="export-link no-text" href="javascript:" data-export="pocket" role="button" aria-label="포켓에 내보내기">Pocket</a>
+<div class="export-visual icon pocket-app" hidden="">
+<p>Pocket</p>
+</div>
+</li>
+<li class="export-item">
+<a class="export-link no-text" href="javascript:" data-export="evernote" role="button" aria-label="에버노트에 내보내기">Evernote</a>
+<div class="export-visual icon evernote" hidden="">
+<p>Evernote</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section class="activity-content" id="related">
+<h2 class="visuallyhidden-content">다른 글</h2>
+<div class="related-content card-type">
+<ul class="fc-list itemlength4">
+
+
+<li class="related-item article-item">
+<div class="index-item-wrap">
+<a class="no-text index-item-link" href="https://geonlee.tistory.com/78?category=318965" role="button">파이썬을 이용해서 순회 알고리즘을 구현해보자 ♻ (feat. DFS, BFS)</a>
+<div class="index-item-visual" hidden="">
+<div class="index-item-text">
+<h2>파이썬을 이용해서 순회 알고리즘을 구현해보자 ♻ (feat. DFS, BFS)</h2>
+<span class="digit">2019.02.08</span>
+<div class="index-item-summary">이전 포스트에서 이진 탐색 트리(Binary Search Tree)를 구현해보았습니다. 트리는 배열이나 스택, 큐등의 자료구조와는 달리 데이터를 직관적으로 살펴보기 어렵습니다. 따라서, 트리를 위한 별도의 순회 알고리…</div>
+</div>
+<div class="index-item-thumbnail" style="background-image:url(//img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&amp;fname=https://t1.daumcdn.net/cfile/tistory/9912EF335C5C81530D);background-position:50% 50%;background-size:cover"></div>
+</div>
+</div>
+</li>
+
+<li class="related-item article-item">
+<div class="index-item-wrap">
+<a class="no-text index-item-link" href="https://geonlee.tistory.com/69?category=318965" role="button">[Python] itertools를 이용한 조합</a>
+<div class="index-item-visual" hidden="">
+<div class="index-item-text">
+<h2>[Python] itertools를 이용한 조합</h2>
+<span class="digit">2019.02.07</span>
+<div class="index-item-summary">Python 내장 라이브러리인 itertools는 Python에서 제공하는 자신만의 반복자를 만드는 휼륭한 모듈입니다. 특정 배열에 대하여 순열이나 조합을 만들어 이를 이용하는 문제를 풀 때, 직접 구현해도 되지만, 이 it…</div>
+</div>
+<div class="index-item-thumbnail" data-style=""></div>
+</div>
+</div>
+</li>
+
+<li class="related-item article-item">
+<div class="index-item-wrap">
+<a class="no-text index-item-link" href="https://geonlee.tistory.com/58?category=318965" role="button">[Python] Dictionary(사전) 자료형 : { k : v }의 sort(정렬)</a>
+<div class="index-item-visual" hidden="">
+<div class="index-item-text">
+<h2>[Python] Dictionary(사전) 자료형 : { k : v }의 sort(정렬)</h2>
+<span class="digit">2019.02.05</span>
+<div class="index-item-summary">1. Key 값을 정렬 Python 의 Dictionary 자료형은 { key: value } 쌍으로 값이 들어가 있다. Dictionary 는 Default(기본) 정렬이 Key 값을 기준으로 오름차순으로 Key 값을 정렬하는 것이다. fruits \= { 'apple…</div>
+</div>
+<div class="index-item-thumbnail" style="background-image:url(//img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&amp;fname=https://t1.daumcdn.net/cfile/tistory/99D5493C5C598F1F33);background-position:50% 50%;background-size:cover"></div>
+</div>
+</div>
+</li>
+
+<li class="related-item article-item">
+<div class="index-item-wrap">
+<a class="no-text index-item-link" href="https://geonlee.tistory.com/46?category=318965" role="button">[Python] 정규 표현식(Regular Expression)</a>
+<div class="index-item-visual" hidden="">
+<div class="index-item-text">
+<h2>[Python] 정규 표현식(Regular Expression)</h2>
+<span class="digit">2019.02.02</span>
+<div class="index-item-summary">정규 표현식(Regular Expression) 정규 표현식은 특정한 규칙을 가진 문자열의 패턴을 표현하는 데 사용하는 표현식(Expression)으로 텍스트에서 특정 문자열을 검색하거나 치환할 때 흔히 사용된다. 예를 들어,…</div>
+</div>
+<div class="index-item-thumbnail" style="background-image:url(//img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&amp;fname=https://t1.daumcdn.net/cfile/tistory/99827F335C54984C0C);background-position:50% 50%;background-size:cover"></div>
+</div>
+</div>
+</li>
+
+
+<li class="related-item blank-item blank1" aria-hidden="true"></li>
+<li class="related-item blank-item blank2" aria-hidden="true"></li>
+<li class="related-item blank-item blank3" aria-hidden="true"></li>
+<li class="related-item blank-item blank4" aria-hidden="true"></li>
+</ul>
+<div class="more-contents-wrap">
+<a class="icon fade-link more-contents" href="https://geonlee.tistory.com/category/Language/Python" role="button">다른 글 더 둘러보기</a>
+</div>
+</div>
+</section>
+</div>
+
+
+
+<script>let generalThumb="https://t1.daumcdn.net/cfile/tistory/99AD154D5C5C50D932";</script>
+
+<script src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/highlight.min.js.다운로드"></script>
+
+
+<script>document.head.insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/vs2015.min.css">');let code=document.getElementById("article").getElementsByTagName("pre");for(let i=0;i<code.length;i++){let codeInner=code[i].getElementsByTagName("code")[0];if(codeInner!==null){codeInner.closest("pre").classList.add("procode-wrap");}};hljs.highlightAll();</script>
+
+
+<script src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/highlightjs-line-numbers.min.js.다운로드"></script>
+<script>hljs.initLineNumbersOnLoad();</script>
+
+
+<script src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/jquery-3.2.1.min.js.다운로드"></script>
+<script defer="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/script_article.js.다운로드"></script>
+<script defer="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/script_activity.js.다운로드"></script>
+<script defer="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/script_export.js.다운로드"></script>
+<script defer="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/script_comments.js.다운로드"></script>
+</article>
+
+
+</div>
+</div>
+
+</section>
+</main>
+
+<nav class="scrollbar-support" id="pagination" aria-hidden="false">
+<div class="pagination-wrap">
+<ul class="pagination fc-list">
+<li class="pg-prev">
+<a class="icon fade-link " href="https://geonlee.tistory.com/73" role="button">최신</a>
+</li>
+<li class="pg-number">
+<ul class="fc-list">
+
+<li class="available">
+<a class="fade-link digit number" href="https://geonlee.tistory.com/258" role="button" aria-label="1페이지"><span>1</span></a>
+</li>
+
+<li class="ellipsis">
+<a class="fade-link digit number" role="" aria-hidden="true"><span>…</span></a>
+</li>
+
+<li class="available">
+<a class="fade-link digit number" href="https://geonlee.tistory.com/76" role="button" aria-label="162페이지"><span>162</span></a>
+</li>
+
+<li class="available">
+<a class="fade-link digit number" href="https://geonlee.tistory.com/75" role="button" aria-label="163페이지"><span>163</span></a>
+</li>
+
+<li class="available">
+<a class="fade-link digit number" href="https://geonlee.tistory.com/74" role="button" aria-label="164페이지"><span>164</span></a>
+</li>
+
+<li class="available">
+<a class="fade-link digit number" href="https://geonlee.tistory.com/73" role="button" aria-label="165페이지"><span>165</span></a>
+</li>
+
+<li>
+<a class="fade-link digit number" role="button" aria-label="166페이지" aria-selected="true"><span class="selected">166</span></a>
+</li>
+
+<li class="available">
+<a class="fade-link digit number" href="https://geonlee.tistory.com/71" role="button" aria-label="167페이지"><span>167</span></a>
+</li>
+
+<li class="available">
+<a class="fade-link digit number" href="https://geonlee.tistory.com/70" role="button" aria-label="168페이지"><span>168</span></a>
+</li>
+
+<li class="available">
+<a class="fade-link digit number" href="https://geonlee.tistory.com/69" role="button" aria-label="169페이지"><span>169</span></a>
+</li>
+
+<li class="available">
+<a class="fade-link digit number" href="https://geonlee.tistory.com/68" role="button" aria-label="170페이지"><span>170</span></a>
+</li>
+
+<li class="ellipsis">
+<a class="fade-link digit number" role="" aria-hidden="true"><span>…</span></a>
+</li>
+
+<li class="available">
+<a class="fade-link digit number" href="https://geonlee.tistory.com/4" role="button" aria-label="234페이지"><span>234</span></a>
+</li>
+
+</ul>
+</li>
+<li class="pg-next">
+<a class="icon fade-link " href="https://geonlee.tistory.com/71" role="button">다음</a>
+</li>
+</ul>
+</div>
+</nav>
+
+<aside class="sidebar-area">
+<div class="sidebar-scrollbar overflowing" hidden="">
+<div class="sidebar-scrollbar-inner" style="top: 0%; height: 32.0634%;"></div>
+</div>
+<div class="sidebar-inner" style="width: calc(100% + 17px);">
+<section class="sidebar-title">
+<h3 class="visuallyhidden-content">정보</h3>
+<a class="no-text sidebar-title-link" href="https://geonlee.tistory.com/" role="button">빠리의 택시 운전사 블로그의 첫 페이지로 이동</a>
+<div class="sidebar-title-inner" aria-hidden="true">
+<div class="sidebar-avatar" style="background-image:url(//img1.daumcdn.net/thumb/R240x0/?scode=mtistory2&amp;fname=https://tistory4.daumcdn.net/tistory/1840821/attach/692980f4c4ba4594a45eade842c9bfa8)"></div>
+<p>빠리의 택시 운전사</p>
+</div>
+</section>
+<div class="sidebar-contents">
+<div class="sub-navigation" id="sidebar" aria-hidden="false" style="overflow-y: scroll; display: block;">
+<button class="fc-appearance fc-icon fc-button close-sidebar" data-func="close-sidebar">사이드바 닫기</button>
+<ul class="fc-list sidebar-func-list">
+<li class="sidebar-go-to-index-inner" style="" aria-hidden="false"><a class="fc-icon sidebar-go-to-index" href="https://geonlee.tistory.com/" role="button">빠리의 택시 운전사의 첫 페이지로 이동</a></li>
+</ul>
+<div class="sidebar">
+<button class="fc-appearance fc-button no-text transparent" data-func="close-sidebar" style="display:none" aria-hidden="true">사이드바 닫기</button>
+                        <div class="revenue_unit_wrap ">
+               <div class="revenue_unit_item adsense  responsive">
+                    <div class="revenue_unit_info">반응형</div>
+                    <script async="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/f.txt"></script>
+                    <ins class="adsbygoogle" style="display:block;" data-ad-host="ca-host-pub-9691043933427338" data-ad-client="ca-pub-9994255438328666" data-ad-format="auto"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({}); </script>
+               </div>
+            </div>
+<!-- 검색 -->
+<section class="module search-module icon empty">
+<h3>검색</h3>
+
+<form>
+<input class="fc-appearance search-field" type="search" name="search" value="" onkeypress="if(event.keyCode==13){try{window.location.href=&#39;/search/&#39;+looseURIEncode(document.getElementsByName(&#39;search&#39;)[0].value);document.getElementsByName(&#39;search&#39;)[0].value=&#39;&#39;;return false;}catch(e){}}" aria-label="검색어 입력" autocomplete="off" required="">
+<button class="fc-appearance fc-icon search-button" onclick="try{window.location.href=&#39;/search/&#39;+looseURIEncode(document.getElementsByName(&#39;search&#39;)[0].value);document.getElementsByName(&#39;search&#39;)[0].value=&#39;&#39;;return false;}catch(e){}" disabled="">검색</button>
+</form>
+
+</section>
+
+<!-- 메뉴 -->
+<section class="module menu-module">
+<h3>메뉴</h3>
+<ul>		<li class="t_menu_home first">
+			<a href="https://geonlee.tistory.com/" role="button">홈</a>
+		</li>
+				<li class="t_menu_tag">
+			<a href="https://geonlee.tistory.com/tag" role="button">태그</a>
+		</li>
+				
+				
+				<li class="t_menu_guestbook last">
+			<a href="https://geonlee.tistory.com/guestbook" role="button">방명록</a>
+		</li>
+		</ul>
+</section>
+
+<!-- 카테고리 -->
+<section class="module category-module close-sub-category">
+<h3>카테고리</h3>
+<ul class="tt_category">
+	<li class="">
+		<a class="link_tit" href="https://geonlee.tistory.com/category" role="button">
+			분류 전체보기							<span class="c_cnt" aria-hidden="true">(234)</span>
+			
+					</a>
+
+				<ul class="category_list">
+							<li class="closed">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Web" role="button">
+						Web													<span class="c_cnt" aria-hidden="true">(63)</span>
+						
+											</a>
+
+										<button class="fc-icon fc-appearance category-toggle" aria-expanded="false">
+						Web													(63)
+						
+											의 세부 카테고리</button><ul class="sub_category_list" style="display: none;">
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Web/HTML" role="button">
+									HTML
+																			<span class="c_cnt" aria-hidden="true">(7)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Web/CSS" role="button">
+									CSS
+																			<span class="c_cnt" aria-hidden="true">(3)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Web/JavaScript" role="button">
+									JavaScript
+																			<span class="c_cnt" aria-hidden="true">(30)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Web/TypeScript" role="button">
+									TypeScript
+																			<span class="c_cnt" aria-hidden="true">(1)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Web/React" role="button">
+									React
+																			<span class="c_cnt" aria-hidden="true">(6)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Web/Next.js" role="button">
+									Next.js
+																			<span class="c_cnt" aria-hidden="true">(8)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Web/Vue.js" role="button">
+									Vue.js
+																			<span class="c_cnt" aria-hidden="true">(1)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Web/GraphQL" role="button">
+									GraphQL
+																			<span class="c_cnt" aria-hidden="true">(1)</span>
+									
+																	</a>
+							</li>
+											</ul>
+					
+				</li>
+							<li class="closed">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Language" role="button">
+						Language													<span class="c_cnt" aria-hidden="true">(7)</span>
+						
+											</a>
+
+										<button class="fc-icon fc-appearance category-toggle" aria-expanded="false">
+						Language													(7)
+						
+											의 세부 카테고리</button><ul class="sub_category_list" style="display: none;">
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Language/Python" role="button">
+									Python
+																			<span class="c_cnt" aria-hidden="true">(5)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Language/Java" role="button">
+									Java
+																			<span class="c_cnt" aria-hidden="true">(2)</span>
+									
+																	</a>
+							</li>
+											</ul>
+					
+				</li>
+							<li class="closed">
+					<a class="link_item" href="https://geonlee.tistory.com/category/%EB%85%B8%EB%A7%88%EB%93%9C%EC%BD%94%EB%8D%94" role="button">
+						노마드코더													<span class="c_cnt" aria-hidden="true">(3)</span>
+						
+											</a>
+
+										<button class="fc-icon fc-appearance category-toggle" aria-expanded="false">
+						노마드코더													(3)
+						
+											의 세부 카테고리</button><ul class="sub_category_list" style="display: none;">
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/%EB%85%B8%EB%A7%88%EB%93%9C%EC%BD%94%EB%8D%94/%ED%8A%B8%EC%9C%84%ED%84%B0%20%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9" role="button">
+									트위터 클론코딩
+																			<span class="c_cnt" aria-hidden="true">(3)</span>
+									
+																	</a>
+							</li>
+											</ul>
+					
+				</li>
+							<li class="closed">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Job" role="button">
+						Job													<span class="c_cnt" aria-hidden="true">(3)</span>
+						
+											</a>
+
+										<button class="fc-icon fc-appearance category-toggle" aria-expanded="false">
+						Job													(3)
+						
+											의 세부 카테고리</button><ul class="sub_category_list" style="display: none;">
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Job/Interview" role="button">
+									Interview
+																			<span class="c_cnt" aria-hidden="true">(2)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Job/Portfolio" role="button">
+									Portfolio
+																			<span class="c_cnt" aria-hidden="true">(1)</span>
+									
+																	</a>
+							</li>
+											</ul>
+					
+				</li>
+							<li class="closed">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Algorithm" role="button">
+						Algorithm													<span class="c_cnt" aria-hidden="true">(48)</span>
+						
+											</a>
+
+										<button class="fc-icon fc-appearance category-toggle" aria-expanded="false">
+						Algorithm													(48)
+						
+											의 세부 카테고리</button><ul class="sub_category_list" style="display: none;">
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Algorithm/Problem%20Solving" role="button">
+									Problem Solving
+																			<span class="c_cnt" aria-hidden="true">(44)</span>
+									
+																	</a>
+							</li>
+											</ul>
+					
+				</li>
+							<li class="closed">
+					<a class="link_item" href="https://geonlee.tistory.com/category/IDE" role="button">
+						IDE													<span class="c_cnt" aria-hidden="true">(3)</span>
+						
+											</a>
+
+										<button class="fc-icon fc-appearance category-toggle" aria-expanded="false">
+						IDE													(3)
+						
+											의 세부 카테고리</button><ul class="sub_category_list" style="display: none;">
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/IDE/VS%20Code" role="button">
+									VS Code
+																			<span class="c_cnt" aria-hidden="true">(3)</span>
+									
+																	</a>
+							</li>
+											</ul>
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Google%20Adsense" role="button">
+						Google Adsense													<span class="c_cnt" aria-hidden="true">(4)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Google%20Analytics" role="button">
+						Google Analytics													<span class="c_cnt" aria-hidden="true">(1)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Side%20Project" role="button">
+						Side Project													<span class="c_cnt" aria-hidden="true">(6)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="closed">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Devlog" role="button">
+						Devlog													<span class="c_cnt" aria-hidden="true">(22)</span>
+						
+											</a>
+
+										<button class="fc-icon fc-appearance category-toggle" aria-expanded="false">
+						Devlog													(22)
+						
+											의 세부 카테고리</button><ul class="sub_category_list" style="display: none;">
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Devlog/%ED%9A%8C%EA%B3%A0%EB%A1%9D" role="button">
+									회고록
+																			<span class="c_cnt" aria-hidden="true">(2)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Devlog/%ED%95%B4%EC%BB%A4%ED%86%A4" role="button">
+									해커톤
+																			<span class="c_cnt" aria-hidden="true">(1)</span>
+									
+																	</a>
+							</li>
+											</ul>
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Design%20Pattern" role="button">
+						Design Pattern													<span class="c_cnt" aria-hidden="true">(3)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Network" role="button">
+						Network													<span class="c_cnt" aria-hidden="true">(3)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Docker" role="button">
+						Docker													<span class="c_cnt" aria-hidden="true">(2)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Notion" role="button">
+						Notion													<span class="c_cnt" aria-hidden="true">(2)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Computer%20Security" role="button">
+						Computer Security													<span class="c_cnt" aria-hidden="true">(4)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Database" role="button">
+						Database													<span class="c_cnt" aria-hidden="true">(1)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Git" role="button">
+						Git													<span class="c_cnt" aria-hidden="true">(3)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Firebase" role="button">
+						Firebase													<span class="c_cnt" aria-hidden="true">(0)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Machine%20Learning" role="button">
+						Machine Learning													<span class="c_cnt" aria-hidden="true">(7)</span>
+						
+											</a>
+
+					
+				</li>
+							<li class="closed">
+					<a class="link_item" href="https://geonlee.tistory.com/category/Life" role="button">
+						Life													<span class="c_cnt" aria-hidden="true">(49)</span>
+						
+											</a>
+
+										<button class="fc-icon fc-appearance category-toggle" aria-expanded="false">
+						Life													(49)
+						
+											의 세부 카테고리</button><ul class="sub_category_list" style="display: none;">
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Life/%EF%A6%8E%20%E6%9C%88%20%E6%97%A5" role="button">
+									年 月 日
+																			<span class="c_cnt" aria-hidden="true">(11)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Life/Bla%20Bla" role="button">
+									Bla Bla
+																			<span class="c_cnt" aria-hidden="true">(11)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Life/Cinema" role="button">
+									Cinema
+																			<span class="c_cnt" aria-hidden="true">(16)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Life/Drame" role="button">
+									Drame
+																			<span class="c_cnt" aria-hidden="true">(3)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Life/Book" role="button">
+									Book
+																			<span class="c_cnt" aria-hidden="true">(3)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Life/Game" role="button">
+									Game
+																			<span class="c_cnt" aria-hidden="true">(2)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Life/Digital%20Nomad" role="button">
+									Digital Nomad
+																			<span class="c_cnt" aria-hidden="true">(2)</span>
+									
+																	</a>
+							</li>
+													<li class="">
+								<a class="link_sub_item icon" href="https://geonlee.tistory.com/category/Life/Blog" role="button">
+									Blog
+																			<span class="c_cnt" aria-hidden="true">(1)</span>
+									
+																	</a>
+							</li>
+											</ul>
+					
+				</li>
+					</ul>
+			</li>
+</ul>
+</section>
+
+<!-- 최근 글 -->
+<section class="module recent-module thumbnail-module-type">
+<h3>최근 글</h3>
+<ul>
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/258" role="button" aria-label="글: 티스토리(Tistory) API - 앱 등록부터⋯">티스토리(Tistory) API - 앱 등록부터⋯</a>
+<div class="post-module-visual" aria-hidden="true">
+<p class="icon">티스토리(Tistory) API - 앱 등록부터⋯</p>
+<span class="digit">2022.04.12</span>
+<div class="post-module-visual-image" style="background-image:url(//img1.daumcdn.net/thumb/R180x0/?scode=mtistory2&amp;fname=https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FWgNvt%2Fbtrzadl5iUJ%2FveUqpGQkk7RmUPfpIvbCm0%2Fimg.png)"></div>
+</div>
+</li>
+
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/257" role="button" aria-label="글: 모두 자동화해버리는 Github Actions!">모두 자동화해버리는 Github Actions!</a>
+<div class="post-module-visual" aria-hidden="true">
+<p class="icon">모두 자동화해버리는 Github Actions!</p>
+<span class="digit">2022.03.29</span>
+<div class="post-module-visual-image" style="background-image:url(//img1.daumcdn.net/thumb/R180x0/?scode=mtistory2&amp;fname=https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdPRZX6%2FbtrxLlLU6xi%2FBf7hLGYHp9h2rq121jBc4k%2Fimg.png)"></div>
+</div>
+</li>
+
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/256" role="button" aria-label="글: 👋 2021 👋">👋 2021 👋</a>
+<div class="post-module-visual" aria-hidden="true">
+<p class="icon">👋 2021 👋</p>
+<span class="digit">2021.12.23</span>
+<div class="post-module-visual-image" style="background-image:url(//img1.daumcdn.net/thumb/R180x0/?scode=mtistory2&amp;fname=https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F4KlWO%2FbtroE8Af6gg%2FiwuZmgKec1pOjCtx803HCk%2Fimg.jpg)"></div>
+</div>
+</li>
+
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/255" role="button" aria-label="글: 더 나은 광고 표준(Better Ads Standard⋯">더 나은 광고 표준(Better Ads Standard⋯</a>
+<div class="post-module-visual" aria-hidden="true">
+<p class="icon">더 나은 광고 표준(Better Ads Standard⋯</p>
+<span class="digit">2021.10.21</span>
+<div class="post-module-visual-image" style="background-image:url(//img1.daumcdn.net/thumb/R180x0/?scode=mtistory2&amp;fname=https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLBcbV%2FbtriuivdyqT%2FkMbPrld82ODwxPgkos0KUk%2Fimg.png)"></div>
+</div>
+</li>
+
+</ul>
+</section>
+
+<!-- 인기 글 -->
+<section class="module famous-module thumbnail-module-type">
+<h3>인기 글</h3>
+<ul>
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/205" role="button" aria-label="인기 글: 내가 메인 브라우저를 크롬에서 네이버⋯">내가 메인 브라우저를 크롬에서 네이버⋯</a>
+<div class="post-module-visual" aria-hidden="true">
+<p class="icon">내가 메인 브라우저를 크롬에서 네이버⋯</p>
+<span class="digit">2020.03.22</span>
+<div class="post-module-visual-image" style="background-image:url(//img1.daumcdn.net/thumb/R180x0/?scode=mtistory2&amp;fname=https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FPssuC%2FbtqCVEyCxiE%2F6qjHWfDU0nHELZRKEnA4tk%2Fimg.png)"></div>
+</div>
+</li>
+
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/207" role="button" aria-label="인기 글: ORM(Object Relational Mapping)이 뭘까⋯">ORM(Object Relational Mapping)이 뭘까⋯</a>
+<div class="post-module-visual" aria-hidden="true">
+<p class="icon">ORM(Object Relational Mapping)이 뭘까⋯</p>
+<span class="digit">2020.04.03</span>
+<div class="post-module-visual-image" style="background-image:url(//img1.daumcdn.net/thumb/R180x0/?scode=mtistory2&amp;fname=https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FzmBmh%2FbtrfREPXUNv%2FJd4nKONiHm69N2z0pZKD21%2Fimg.jpg)"></div>
+</div>
+</li>
+
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/206" role="button" aria-label="인기 글: 당신의 Github을 매력적으로 보일 수 있⋯">당신의 Github을 매력적으로 보일 수 있⋯</a>
+<div class="post-module-visual" aria-hidden="true">
+<p class="icon">당신의 Github을 매력적으로 보일 수 있⋯</p>
+<span class="digit">2020.03.29</span>
+<div class="post-module-visual-image" style="background-image:url(//img1.daumcdn.net/thumb/R180x0/?scode=mtistory2&amp;fname=https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcvKVpk%2FbtqC0JuXsAL%2FO57pRNCyHJJ2w5GNvw52s1%2Fimg.jpg)"></div>
+</div>
+</li>
+
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/229" role="button" aria-label="인기 글: React 개발이 이렇게 쉬웠나? (Feat. Ne⋯">React 개발이 이렇게 쉬웠나? (Feat. Ne⋯</a>
+<div class="post-module-visual" aria-hidden="true">
+<p class="icon">React 개발이 이렇게 쉬웠나? (Feat. Ne⋯</p>
+<span class="digit">2020.12.03</span>
+<div class="post-module-visual-image" style="background-image:url(//img1.daumcdn.net/thumb/R180x0/?scode=mtistory2&amp;fname=https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcB49Ub%2FbtqO12oAcPT%2FQZnsSkvs5SF8hUaK0OWZhK%2Fimg.png)"></div>
+</div>
+</li>
+
+</ul>
+</section>
+
+<!-- 최근 댓글 -->
+<section class="module recent-comments-module">
+<h3>댓글</h3>
+<ul>
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/207#comment6383958" role="button" aria-label="댓글: 엄청 깔끔하게 정리된 글입니다. 감사합⋯">엄청 깔끔하게 정리된 글입니다. 감사합⋯</a>
+</li>
+
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/256#comment6309838" role="button" aria-label="댓글: 개발자에게 운동은 더 중요해보입니다~⋯">개발자에게 운동은 더 중요해보입니다~⋯</a>
+</li>
+
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/256#comment6302849" role="button" aria-label="댓글: 운동 중요합니다~ 잘 보고 갑니다!!">운동 중요합니다~ 잘 보고 갑니다!!</a>
+</li>
+
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/254#comment6241625" role="button" aria-label="댓글: 강의 들으면서 간단한 변수명으로 바꾼⋯">강의 들으면서 간단한 변수명으로 바꾼⋯</a>
+</li>
+
+</ul>
+</section>
+
+<!-- 공지사항 -->
+
+<section class="module notice-module">
+<h3>공지사항</h3>
+<ul>
+
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/notice" role="button" aria-label="공지사항 전체 보기…">전체 보기…</a>
+</li>
+
+</ul>
+</section>
+
+
+<!-- 아카이브 -->
+<section class="module archive-module">
+<h3>아카이브</h3>
+<ul>
+
+<li>
+<a class="icon digit" href="https://geonlee.tistory.com/archive/202204" role="button" aria-label="2022/04 아카이브에 있는 1개의 글">2022/04</a>
+</li>
+
+
+<li>
+<a class="icon digit" href="https://geonlee.tistory.com/archive/202203" role="button" aria-label="2022/03 아카이브에 있는 1개의 글">2022/03</a>
+</li>
+
+
+<li>
+<a class="icon digit" href="https://geonlee.tistory.com/archive/202112" role="button" aria-label="2021/12 아카이브에 있는 1개의 글">2021/12</a>
+</li>
+
+
+<li>
+<a class="icon digit" href="https://geonlee.tistory.com/archive/202110" role="button" aria-label="2021/10 아카이브에 있는 3개의 글">2021/10</a>
+</li>
+
+</ul>
+</section>
+
+<!-- 태그 -->
+<section class="module tags-module">
+<h3>태그</h3>
+<ul>
+
+<li>
+<a class="icon cloud3" href="https://geonlee.tistory.com/tag/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8" role="button" aria-label="자바스크립트 태그">자바스크립트</a>
+</li>
+
+<li>
+<a class="icon cloud3" href="https://geonlee.tistory.com/tag/Kakao" role="button" aria-label="Kakao 태그">Kakao</a>
+</li>
+
+<li>
+<a class="icon cloud1" href="https://geonlee.tistory.com/tag/PYTHON" role="button" aria-label="PYTHON 태그">PYTHON</a>
+</li>
+
+<li>
+<a class="icon cloud3" href="https://geonlee.tistory.com/tag/%EC%B9%B4%EC%B9%B4%EC%98%A4" role="button" aria-label="카카오 태그">카카오</a>
+</li>
+
+<li>
+<a class="icon cloud2" href="https://geonlee.tistory.com/tag/javascript" role="button" aria-label="javascript 태그">javascript</a>
+</li>
+
+<li>
+<a class="icon cloud3" href="https://geonlee.tistory.com/tag/react" role="button" aria-label="react 태그">react</a>
+</li>
+
+<li>
+<a class="icon cloud3" href="https://geonlee.tistory.com/tag/programmers" role="button" aria-label="programmers 태그">programmers</a>
+</li>
+
+<li>
+<a class="icon cloud2" href="https://geonlee.tistory.com/tag/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4" role="button" aria-label="프로그래머스 태그">프로그래머스</a>
+</li>
+
+<li>
+<a class="icon cloud3" href="https://geonlee.tistory.com/tag/%ED%8C%8C%EC%9D%B4%EC%8D%AC" role="button" aria-label="파이썬 태그">파이썬</a>
+</li>
+
+<li>
+<a class="icon cloud4" href="https://geonlee.tistory.com/tag/KAKAO%20BLIND%20RECRUITMENT" role="button" aria-label="KAKAO BLIND RECRUITMENT 태그">KAKAO BLIND RECRUITMENT</a>
+</li>
+
+
+<li>
+<a class="icon" href="https://geonlee.tistory.com/tag" role="button" aria-label="태그 전체 보기…">전체 보기…</a>
+</li>
+
+</ul>
+</section>
+
+<!-- 나의 외부 링크 -->
+<section class="module link-module favicon-loaded">
+<h3>나의 외부 링크</h3>
+<ul>
+
+<li>
+<a class="" href="https://github.com/dl0312" target="_blank" role="button" aria-label="GitHub 링크"><img class="favicon" style="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/github.png" alt="링크의 아이콘" width="16" height="16" aria-hidden="true">GitHub</a>
+</li>
+
+
+<li>
+<a class="icon no-favicon" href="https://www.notion.so/Geon-Lee-0a2ead807ec24791b5f75a5d0974fca8" target="_blank" role="button" aria-label="Portfolio 링크">Portfolio</a>
+</li>
+
+
+<li>
+<a class="" href="https://www.higherlowerkorea.com/" target="_blank" role="button" aria-label="더 많이 더 적게 링크"><img class="favicon" style="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/favicon.ico" alt="링크의 아이콘" width="16" height="16" aria-hidden="true">더 많이 더 적게</a>
+</li>
+
+
+<li>
+<a class="icon no-favicon" href="https://www.notion.so/?r=762f32e67b1b41ecb8e8c631ed29176e" target="_blank" role="button" aria-label="노션 시작하기 링크">노션 시작하기</a>
+</li>
+
+</ul>
+</section>
+
+</div>
+</div>
+<div class="sub-navigation" id="blog-info" hidden="">
+<button class="fc-appearance fc-icon fc-button close-blog-info" data-func="close-blog-info">블로그 정보 닫기</button>
+<div class="sidebar">
+<button class="fc-appearance fc-button no-text transparent" data-func="close-blog-info" hidden="">블로그 정보 닫기</button>
+<section class="module info-module">
+<h3>정보</h3>
+<a class="info-module-button no-text" href="https://geonlee.tistory.com/" role="button">택시 운전사의 빠리의 택시 운전사</a>
+<div class="align-center" aria-hidden="true">
+<div class="info-module-icon" style="background-image:url(//img1.daumcdn.net/thumb/R240x0/?scode=mtistory2&amp;fname=https://tistory4.daumcdn.net/tistory/1840821/attach/692980f4c4ba4594a45eade842c9bfa8)"></div>
+<div class="info-module-text">
+<p>빠리의 택시 운전사</p>
+<span>택시 운전사</span>
+</div>
+</div>
+</section>
+
+<!-- 블로그 구독하기 -->
+<section class="module subscribe-module">
+<h3>블로그 구독하기</h3>
+<ul>
+<li class="enable-subscription">
+<a class="icon mdl-subsc-on-tistory fc-subscribe btn_subscription" href="javascript:" role="button" data-blog-id="1840821" data-url="https://geonlee.tistory.com" data-device="web_pc"><span class="txt_state">구독하기</span></a>
+</li>
+
+<li>
+<a class="icon mdl-subsc-on-feed" href="https://geonlee.tistory.com/rss" target="_blank" role="button">RSS 피드</a>
+</li>
+</ul>
+</section>
+
+<!-- 방문자 -->
+<section class="module visitor-module" role="text" aria-label="이 블로그는 총 493,666명이 방문했고, 어제는 438명, 오늘은 11명이 방문했습니다.">
+<h3>방문자</h3>
+<ul>
+<li class="visitor-emphasis">
+<span class="visitor-lable">전체 방문자</span> <span class="visitor-count digit">493,666</span>
+</li>
+<li>
+<span class="visitor-lable">오늘</span> <span class="visitor-count digit">11</span>
+</li>
+<li>
+<span class="visitor-lable">어제</span> <span class="visitor-count digit">438</span>
+</li>
+</ul>
+</section>
+
+<!-- 티스토리 로그인 정보 -->
+<section class="module tistory-account"><div class="header_layer layer_tool"><div class="inner_header_layer"><h2 class="screen_out">개인정보</h2><ul class="list_toolbar"><li><a href="https://www.tistory.com/" class="link_list" role="button">티스토리 홈</a></li><li><a href="https://www.tistory.com/category" class="link_list" role="button">스토리</a></li><li><a href="https://www.tistory.com/forum" class="link_list" role="button">포럼</a></li><li><a href="https://www.tistory.com/auth/login" class="link_list" role="button">로그인</a></li></ul></div></div></section>
+
+</div>
+</div>
+</div>
+</div>
+</aside>
+<footer class="scrollbar-support bottom" id="footer" aria-hidden="false">
+<div class="ft-left">
+<button class="fc-icon fc-circle fc-appearance fc-button fc-subscribe ft-subscribe btn_subscription" data-blog-id="1840821" data-url="https://geonlee.tistory.com" data-device="web_pc">빠리의 택시 운전사 블로그 <span class="txt_state">구독하기</span></button>
+</div>
+<address class="ft-center">
+<span lang="en" class="tistory-address"><a class="fade-link" href="https://www.tistory.com/" target="_blank">Powered by Tistory / Kakao.</a></span>
+<span class="copyright">Copyright © 택시 운전사.</span>
+
+</address>
+<div class="ft-right">
+<button class="fc-icon fc-circle fc-appearance fc-button ft-go-to-top" data-func="go-to-top">페이지 맨 위로 올라가기</button>
+</div>
+</footer>
+
+
+<script>let
+imagesURL="https://cdn.jsdelivr.net/gh/kaniwari/space@11.5.2/build/",title="빠리의 택시 운전사",blogLink="/",manageLink="https://geonlee.tistory.com/manage",fcver="",fcverCheck="?fcver=2520",fixedSidebar="true",limitedWidth="true",articleWidth=parseInt("728"),expandedImgWidth=parseInt("1100"),trademark="undefined",dawnTrademark="undefined",nightTrademark="undefined",coverTrademark="undefined",jacketColor="TRANSPARENT",jacketImage="undefined",dayPageColor="#647788",dayColor="#349aff",dawnPageColor="#59656d",dawnColor="#2284d9",nightPageColor="#748a96",nightColor="#74d5ff",altCover="https://tistory2.daumcdn.net/tistory/1840821/skinSetting/bd097c01fbea4535b911da2b8c78702d",secondAltCover="undefined",thirdAltCover="undefined",fourthAltCover="undefined",dayKeyword="",dawnKeyword="",nightKeyword="",pageCoverKeyword="",fullscreenPageCoverKeyword="",disabledPageCoverKeyword="",altCoverKeyword="",secondCoverKeyword="",thirdCoverKeyword="",fourthCoverKeyword="",smallGalleryKeyword="",galleryKeyword="",largeGalleryKeyword="",posterTypeKeyword="",cardTypeKeyword="",textTypeKeyword="",hiddenTextKeyword="",showTextKeyword="",serifKeyword="",sanSerifKeyword="",tabSize=parseInt("2"),sidebarButtonColor="transparent",sidebarDawnButtonColor="transparent",sidebarNightButtonColor="transparent",sidebarHoverColor="transparent",sidebarDawnHoverColor="transparent",sidebarNightHoverColor="transparent",sidebarColor="transparent",sidebarDawnColor="transparent",sidebarNightColor="transparent",sidebarImage="undefined",sidebarDawnImage="undefined",sidebarNightImage="undefined",sidebarImgPosition="50% 50%",sidebarImgSize="cover",sidebarImgRepeat="repeat",sidebarTrademark="undefined",sidebarDawnTrademark="undefined",sidebarNightTrademark="undefined",naverID="undefined",slideInterval=1000*(Number("5")+1)</script>
+<script defer="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/script.js.다운로드"></script>
+<script defer="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/script_sidebar.js.다운로드"></script>
+<script defer="" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/script_appearance.js.다운로드"></script>
+	
+<script>
+  var content = document.querySelector('#article')
+  var headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6, h7')
+  var headingMap = {}
+
+  Array.prototype.forEach.call(headings, function (heading) {
+      var id = heading.id ? heading.id : heading.textContent.trim().toLowerCase()
+                 .split(' ').join('-').replace(/[\!\@\#\$\%\^\&\*\(\):]/ig, '')
+      headingMap[id] = !isNaN(headingMap[id]) ? ++headingMap[id] : 0
+      if (headingMap[id]) {
+        heading.id = id + '-' + headingMap[id]
+      } else {
+        heading.id = id
+      }
+    })
+
+  tocbot.init({
+    tocSelector: '.toc',
+    contentSelector: '#article',
+    headingSelector:'h1, h2, h3',
+    hasInnerContainers: false
+  });
+
+  $(document).ready(function(){
+			var thisEl = $(this)
+			var tocEl = $('.toc')
+			var articleFooterStrokeEl =  $('.article-stroke');
+		
+			$('.toc').addClass('toc-absolute-top');
+
+			var toc_top = $('.toc').offset().top - 165;
+		
+			console.log(thisEl.scrollTop(), $('.toc').offset().top - 165, $('.toc').position().top, articleFooterStrokeEl.offset().top)
+			$(window).scroll(function() {
+				if ($(this).scrollTop() < toc_top) {
+					tocEl.addClass('toc-absolute-top');
+					tocEl.removeClass('toc-fixed');
+					tocEl.removeClass('toc-absolute-bottom');
+				} else if(articleFooterStrokeEl.offset().top - thisEl.scrollTop() < 600 ) {
+					tocEl.addClass('toc-absolute-bottom');
+					tocEl.removeClass('toc-fixed');
+					tocEl.removeClass('toc-absolute-top');
+				} else {
+					tocEl.addClass('toc-fixed');
+					tocEl.removeClass('toc-absolute-top');
+					tocEl.removeClass('toc-absolute-bottom');
+				}
+			});
+		});
+</script>
+<script src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/search_dragselection.min.js.다운로드"></script>
+<script>
+    (function($) {
+        $("body").bind('copy', function (e) {
+
+            var url = document.location.href,
+                decodedUrl = decodeURI(url),
+                selection = window.getSelection();
+
+
+            if (typeof window.getSelection == "undefined") {//IE8 or earlier...
+                event.preventDefault();
+
+                var pagelink = '\n\n 출처: ' + decodedUrl,
+                    copytext = selection + pagelink;
+
+                if (window.clipboardData) {
+                    window.clipboardData.setData('Text', copytext);
+                }
+                return;
+            }
+            var body_element = document.getElementsByTagName('body')[0];
+
+            //if the selection is short let's not annoy our users
+            if (("" + selection).length < 30) return;
+
+            //create a div outside of the visible area
+            var newdiv = document.createElement('div');
+            newdiv.style.position = 'absolute';
+            newdiv.style.left = '-99999px';
+            body_element.appendChild(newdiv);
+            newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+            //we need a <pre> tag workaround
+            //otherwise the text inside "pre" loses all the line breaks!
+            if (selection.getRangeAt(0).commonAncestorContainer.nodeName == "PRE") {
+                newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+            }
+
+            newdiv.innerHTML += '<br /><br />출처: <a href="' + url + '">' + escapeHTML(decodedUrl) + '</a> [빠리의 택시 운전사]';
+
+            selection.selectAllChildren(newdiv);
+
+            window.setTimeout(function () {
+                body_element.removeChild(newdiv);
+            }, 200);
+        });
+    })(tjQuery);
+</script>
+	<script>
+	    lightbox.option({
+			"fadeDuration": 200,
+		    "resizeDuration": 200,
+		    "wrapAround": false,
+			"albumLabel": "%1 / %2",
+			"fitImagesInViewport":true ,
+			"stopEvent": false
+	    })
+	</script>            <script type="text/javascript" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/tiara.min.js.다운로드"></script>
+            <script type="text/javascript">window.tiara = {"svcDomain":"user.tistory.com","section":"\uae00\ubdf0","trackPage":"\uae00\ubdf0_\ubcf4\uae30","page":"\uae00\ubdf0","key":"1840821-72","customProps":{"userId":0,"blogId":"1840821","role":"guest","filterTarget":false,"trackPage":"\uae00\ubdf0_\ubcf4\uae30","entryId":"72"},"entry":{"entryId":"72","categoryName":"Python","categoryId":"318965","author":"1381551","authorId":"1381551","image":"1381551","plink":"\/72","tags":["binarytree","PYTHON","\uc774\uc9c4 \ud0d0\uc0c9 \ud2b8\ub9ac","\ud30c\uc774\uc36c"],"key":"1840821-72"},"sentryDsn":"https:\/\/a53520229cd744e798d42900d76b0e2a@aem-collector.daumkakao.io\/713","kakaoAppKey":"b8aef3eeb03fa312b81795386484f051","appUserId":null};</script>
+            <script type="text/javascript" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/tiara.min.js(1).다운로드" defer=""></script>
+                        <script type="text/javascript">
+                window.roosevelt_params_queue = window.roosevelt_params_queue || [{channel_id: 'dk', channel_label: 'tistory'}];
+            </script>
+            <script type="text/javascript" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/roosevelt_dk_bt.js.다운로드" async=""></script><script type="text/javascript">if(window.console!=undefined){setTimeout(console.log.bind(console,"%cTISTORY","font:8em Arial;color:#EC6521;font-weight:bold"),0);setTimeout(console.log.bind(console,"%c  나를 표현하는 블로그","font:2em sans-serif;color:#333;"),0);}</script><iframe style="position:absolute;width:1px;height:1px;left:-100px;top:-100px" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/api.html" id="editEntry"></iframe>            <div class="#menubar menu_toolbar  toolbar_rb">
+                                <h2 class="screen_out">티스토리툴바</h2>
+                                <div class="btn_tool btn_tool_type1" id="menubar_wrapper"><button class="btn_menu_toolbar btn_menu_type2"><span class="img_common_tistory ico_tistory_sign">관리메뉴열기</span></button><div class="header_layer layer_tool" style="display: none;"><div class="inner_header_layer"><h2 class="screen_out">개인정보</h2><ul class="list_toolbar"><li><a href="https://www.tistory.com/" class="link_list">티스토리 홈</a></li><li><a href="https://www.tistory.com/category" class="link_list">스토리</a></li><li><a href="https://www.tistory.com/forum" class="link_list">포럼</a></li><li><a href="https://www.tistory.com/auth/login" class="link_list">로그인</a></li></ul></div></div></div><div class="btn_tool">
+                    <button class="btn_menu_toolbar btn_subscription  #subscribe" data-blog-id="1840821" data-url="https://geonlee.tistory.com" data-device="web_pc">
+                        <strong class="txt_tool_id">빠리의 택시 운전사</strong>
+                        <em class="txt_state">구독하기</em>
+                        <span class="img_common_tistory ico_check_type1"></span>
+                    </button>
+                </div>
+                            </div><script type="text/javascript" src="./파이썬을 이용해서 이진 탐색 트리 구현하기 🎄_files/menubar.min.js.다운로드"></script>        <div class="layer_tooltip">
+            <div class="inner_layer_tooltip">
+                <p class="desc_g"></p>
+            </div>
+        </div>
+        <div id="tistoryEtcLayer" class="layer_post" style="display: none;"></div><div id="tistorySnsLayer" class="layer_post" style="display: none;"><div class="bundle_post"><a href="https://geonlee.tistory.com/72#none" class="btn_mark" data-service="facebook"><span class="ico_sns ico_fb"></span>페이스북으로 공유</a><a href="https://geonlee.tistory.com/72#none" class="btn_mark" data-service="kakaotalk"><span class="ico_sns ico_kt"></span>카카오톡으로 공유</a><a href="https://geonlee.tistory.com/72#none" class="btn_mark" data-service="kakaostory"><span class="ico_sns ico_ks"></span>카카오스토리로 공유</a><a href="https://geonlee.tistory.com/72#none" class="btn_mark" data-service="twitter"><span class="ico_sns ico_tw"></span>트위터로 공유</a><a href="https://geonlee.tistory.com/72#none" class="btn_mark" data-service="url"><span class="ico_sns ico_url"></span>URL 복사</a><span class="ico_postbtn ico_arrbt"></span></div></div>
+<div id="lightboxOverlay" class="lightboxOverlay" style="display: none;"></div><div id="lightbox" class="lightbox" style="display: none;"><div class="lb-outerContainer"><div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="><div class="lb-nav"><a class="lb-prev" href="https://geonlee.tistory.com/72"></a><a class="lb-next" href="https://geonlee.tistory.com/72"></a></div><div class="lb-loader"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer"><div class="lb-data"><div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div><div class="lb-closeContainer"><a class="lb-close"></a></div></div></div></div></body></html>
