@@ -2,10 +2,11 @@
 using namespace std;
 
 
-//mission: 1Çà~level¹øÂ° Çà±îÁö level°³ÀÇ ¸»ÀÌ
-//ÀÌ¹Ì ³õ¿© ÀÖ°í, ±× À§Ä¡°¡ Àü¿ªº¯¼ö cols¿¡ ÀúÀåµÇ¾î ÀÖ´Ù´Â °¡Á¤ÇÏ¿¡,
-//±× »óÅÂ¿¡¼­ ¸¸µé¾î ³¾ ¼ö ÀÖ´Â ¼­·Î ´Ù¸¥ 
-//ÇØÀÇ °³¼ö¸¦ Ä«¿îÆ®ÇÏ¿© ¹ÝÈ¯ÇÑ´Ù.
+
+//mission: 1í–‰~levelë²ˆì§¸ í–‰ê¹Œì§€ levelê°œì˜ ë§ì´
+//ì´ë¯¸ ë†“ì—¬ ìžˆê³ , ê·¸ ìœ„ì¹˜ê°€ ì „ì—­ë³€ìˆ˜ colsì— ì €ìž¥ë˜ì–´ ìžˆë‹¤ëŠ” ê°€ì •í•˜ì—,
+//ê·¸ ìƒíƒœì—ì„œ ë§Œë“¤ì–´ ë‚¼ ìˆ˜ ìžˆëŠ” ì„œë¡œ ë‹¤ë¥¸ 
+//í•´ì˜ ê°œìˆ˜ë¥¼ ì¹´ìš´íŠ¸í•˜ì—¬ ë°˜í™˜í•œë‹¤.
 
 
 #define N 4
@@ -44,5 +45,5 @@ int queens(int level)
 }
 
 int main() {
-	printf("°æ¿ìÀÇ ¼ö = %d ", queens(0));
+	printf("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ = %d ", queens(0));
 }
