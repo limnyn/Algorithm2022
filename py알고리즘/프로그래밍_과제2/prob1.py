@@ -6,7 +6,8 @@
 
 # 즉, 각 줄의 첫 문자열이 단어이며, 이어서 괄호 안에 그 단어의 품사가 저장되어 있고,
 # 이어서 그 단어에 대한 설명이 있다.
-# 이 사전 파일을 읽어서 이진검색트리의 각 노드 하나의 단어를 표현하는 객체가 저장되어야 한다.
+# 이 사전 파일을 읽어서 이진검색 트리에 저장하라. 하나의 단어에 대한 정보(단어, 품사, 설명)를 저장한 클래스 
+# 혹은 구조체를 정의하고, 이진검색트리의 각 노드에 하나의 단어를 표현하는 객체가 저장되어야 한다. 
 # Python 프로그램은 다음과 같은 기능을 제공해야 한다.
 
 # (a) 프로그램을 실행하면 suffled_dict.txt 파일에 있는 모든 단어들을 순서대로 이진검색트리에 삽입한다.
@@ -19,8 +20,10 @@ import time
 import re
 
 class Node(object):
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, wordSet):
+        self.data = wordSet[0]
+        self.wordClass = wordSet[1]
+        self.wordExpl =  wordSet[2]
         self.left = self.right = None
 
 class BinarySearchTree(object):
@@ -34,22 +37,11 @@ class BinarySearchTree(object):
         if node is None:
             node = Node(data)
         else:
-            if data <= node.data:
+            if data[0] <= node.data:
                 node.left = self._insert_value(node.left, data)
             else:
                 node.right = self._insert_value(node.right, data)
         return node
-    
-    def find(self, key):
-        return self._find_value(self.root, key)
-    
-    def _find_value(self, root, key):
-        if root is None or root.data == key:
-            return root is not None
-        elif key < root.data:
-            return self._find_value(root.left, key)
-        else:
-            return self._find_value(root.right, key)
 
     def delete(self, key):
         self.root, deleted = self._delete_value(self.root, key)
@@ -89,11 +81,19 @@ while True:
     line = f.readline()
     if not line:
         break
-    #
-    text_filtered = re.sub('\s\(.*\n', '', line)    #각 단어는 (품사)가 나오기 전까지이다. 띄어쓰기가 포함된 단어가 있으므로 정규표현식을 사용해 단어를 구한다.
-    text_filtered.strip()
-    bst.insert(text_filtered) 
+    word = re.sub('\s\(.*\n', '', line)
+    word.strip()
+    wordExpl = re.sub('.*\s\((.*?)\)\s', '', line)
+    wordExpl = re.sub('\n',"",wordExpl)
+    wordClass = line.replace(wordExpl,"")
+    wordClass = wordClass.replace(word, "")
+    wordClass = wordClass.replace(" ", "")
+    wordClass = wordClass.replace("\n", "")
+    wordClass = wordClass.replace("(", "").replace(")","")
+    wordset=(word,wordClass,wordExpl)
+    bst.insert(wordset)
 f.close()
+
 #(b) 시작.
 #  입력2, 삭제할 단어 한줄씩 리스트에 삽입
 delList=[]
