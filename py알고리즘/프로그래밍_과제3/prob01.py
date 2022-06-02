@@ -27,19 +27,21 @@ class wordConnetction:
         self.next = None
         self.end = None
         
-
     def addWord(self, linkword):
+        if self.find(linkword)==True: # if is already in linked list, skip
+            return False
+        
         newword = wordConnetction(linkword)
         if self.next == None:
             self.end = newword
             self.next = newword
-
         else:
             p = self.end
             p.next = newword
             self.end = newword
+        return True
         
-    def travel(self):
+    def travel(self): #print until end
         print(self.word)
         p = self.next
         while(1):
@@ -49,6 +51,21 @@ class wordConnetction:
             else:
                 p = p.next
 
+    def find(self, target): # mean is in linklist? return t/f
+        if self.word == target:
+            return True
+        p = self.next
+        while(1):
+            if p == None:
+                return False
+            if (p.word == target):
+                return True
+            if (p.next == None):
+                return False
+            else:
+                p = p.next
+    
+
 
         
 
@@ -56,23 +73,22 @@ class wordConnetction:
 # dict = wordConnetction(words[0])
 # dict.addWord(words[1])
 # dict.addWord(words[2])
-# print(dict.word)
+
+# print(dict.addWord('Banana'))
 # dict.travel()
-# line = 'aam	a dutch and german measure of liquids varying in different cities being at amsterdam about  wine gallons at antwerp   at hamburg'
-# line = line.split('\t',1) # line[0] == 단어 line[1] == 뜻
-# print(line)
 
 
 
+# 1. 딕셔너리 생성
+    # 문장 받고 앞 단어만 읽기
+        # line = line.split('\t',1) 로 해결
+        # 라인 읽고 삽입해서 dict 생성하기
 
-# 연결리스트에 필요한 함수
-# 1. 생성, 추가, [출력], 검색함수?
+#입력
 wordDict = {}
 path = r"py알고리즘\프로그래밍_과제3\dict_simplified.txt"
 
 count = 0
-
-#입력
 with open(path, 'r',encoding='utf-8') as f:
     while True:
         line = f.readline()
@@ -84,19 +100,23 @@ with open(path, 'r',encoding='utf-8') as f:
         wordDict[w] = temp
         count+=1
 
-
 #출력
 for key in wordDict:
     print(key,'=' ,wordDict[key].word)
-
 print(count)
-# 1. 딕셔너리 생성
-    # 문장 받고 앞 단어만 읽기
-        # line = line.split('\t',1) 로 해결
-        # 라인 읽고 삽입해서 dict 생성하기
-# 2. 문장에서 단어 읽고 노드 생성, 딕셔너리에 삽입 (단어:next노드(초기값 null))
-# 3. 2번문장 eof까지 반복
-# ->단어 목록 생성됨
+
+
+
+
+
+
+
+# 2. 그래프 제작
+#   다시 파일의 설명부분을 읽어 각 단어가 dict 에 있는지 확인한다
+#   단어 A 의 설명부분을 split 해 단어들의 리스트로 만든다
+#   각 단어 B별 함수실행
+#       문장별 dict에서 단어B를 찾는다. 만약 존재하면 A에 B를 추가하고 B에 A를 추가한다
+# 을
 
 
 
