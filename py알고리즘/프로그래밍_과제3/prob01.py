@@ -64,19 +64,21 @@ class wordConnetction:
                 return False
             else:
                 p = p.next
-    
 
-
+    def countDepth(self): # return node's edges
+        depthCount = 0
+        if self.next == None:
+            return 0
+        p = self.next
+        while(1):
+            if (p.next == None):
+                depthCount+=1
+                return depthCount
+            else:
+                depthCount+=1
+                p = p.next
         
-
-# words = ['Apple', 'Banana', 'Choco']
-# dict = wordConnetction(words[0])
-# dict.addWord(words[1])
-# dict.addWord(words[2])
-
-# print(dict.addWord('Banana'))
-# dict.travel()
-
+    
 
 
 # 1. 딕셔너리 생성
@@ -100,14 +102,10 @@ with open(path, 'r',encoding='utf-8') as f:
         wordDict[w] = temp
         count+=1
 
-#출력
-for key in wordDict:
-    print(key,'=' ,wordDict[key].word)
-print(count)
-
-
-
-
+# #단어와 갯수 출력
+# for key in wordDict:
+#     print(key,'=' ,wordDict[key].word)
+# print(count)
 
 
 
@@ -115,9 +113,49 @@ print(count)
 #   다시 파일의 설명부분을 읽어 각 단어가 dict 에 있는지 확인한다
 #   단어 A 의 설명부분을 split 해 단어들의 리스트로 만든다
 #   각 단어 B별 함수실행
-#       문장별 dict에서 단어B를 찾는다. 만약 존재하면 A에 B를 추가하고 B에 A를 추가한다
-# 을
+#       문장별 dict에서 단어B를 찾는다. 만약 존재하면 A에 B를 추가하고 B에 A를 추가한다(중복시(이미 연결리스트에 있으면) 생략)
+
+
+with open(path, 'r',encoding='utf-8') as f:
+    while True:
+        line = f.readline()
+        if not line or line == '\n':
+            break
+        line = line.split('\t',1)
+        word = str(line[0])
+        expl = line[1].split()
+        for w in expl:
+            if w in wordDict:
+                wordDict[word].addWord(w)
+                wordDict[w].addWord(word)
+
+print('graph made fin!')
+# wordDict['mountain'].travel()
+# print(wordDict['mountain'].countDepth())
+
+
+edgeCount = 0
+maxEdge = 0
+maxWord = ""
+for key in wordDict:
+    temp = wordDict[key].countDepth()
+    if temp > maxEdge:
+        maxEdge = temp
+        maxWord = key
+    edgeCount+= temp
+edgeCount = edgeCount//2
+print("노드의 개수 : ",count,"에지의 개수 : ",edgeCount) # 에지의 개수 정답 확인필요, 테스트결과는 이상 X 
+print("최대 차수를 가지는 정점의 단어 : ", maxWord, "차수 : ", maxEdge)
 
 
 
+# #test parts
+# words = ['Apple', 'Banana', 'Choco']
+# dict = wordConnetction(words[0])
+# dict.addWord(words[1])
+# dict.addWord(words[2])
 
+# print(dict.addWord('thaco'))
+
+# dict.travel()
+# print(dict.countDepth())
