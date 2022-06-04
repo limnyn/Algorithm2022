@@ -1,0 +1,8 @@
+dior	elise chalse beta
+ace	beta elise
+elise	ace dior
+chalse	dior beta
+beta	dior ace chalse
+flower	grow hot
+hot	grow flower
+grow	hot flower

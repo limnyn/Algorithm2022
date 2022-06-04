@@ -27,10 +27,12 @@ class wordConnetction:
         self.next = None
         self.end = None
         self.visited = False
+        self.depth = -1
     
     def check(self):
         self.visited = True
         return 1
+
         
     def addWord(self, linkword):
         if self.find(linkword)==True: # if is already in linked list, skip
@@ -94,7 +96,7 @@ class wordConnetction:
 
 #입력
 wordDict = {}
-path = r"py알고리즘\프로그래밍_과제3\dict_simplified.txt"
+path = r"py알고리즘\프로그래밍_과제3\bfstest.txt"
 
 count = 0
 with open(path, 'r',encoding='utf-8') as f:
@@ -102,7 +104,6 @@ with open(path, 'r',encoding='utf-8') as f:
         line = f.readline()
         if not line or line == '\n':
             break
-        
         line = line.split('\t',1)
         w = str(line[0])
         temp = wordConnetction(w)
@@ -130,6 +131,7 @@ with open(path, 'r',encoding='utf-8') as f:
         line = line.split('\t',1)
         word = str(line[0])
         expl = line[1].split()
+        print(expl)
         for w in expl:
             if w in wordDict:
                 wordDict[word].addWord(w)
@@ -160,13 +162,12 @@ from collections import deque
 def BFS(v: wordConnetction): 
     if v.visited:
         return 0
+    # v를 이미 방문한 곳으로 처리 
+    v.check()
     # 큐 선언 ,v를 큐에 추가해준다 
     nodeCount = 0
     queue = deque()
     queue.append(v)
-    # v를 이미 방문한 곳으로 처리 
-   
-    v.check()
     nodeCount += 1
     temp : wordConnetction 
     nodeWord : wordConnetction
@@ -185,17 +186,26 @@ def BFS(v: wordConnetction):
             temp=temp.next
     return nodeCount
 
+
+
 time0 = time.time()
-
-
+# beta = wordDict["beta"]
+# beta.check()
+# print(beta.visited)
+# maxConnectComp = BFS(wordDict["beta"])
 maxConnectComp = 0
 for key ,value in wordDict.items():
     connectComp = BFS(value)
     if connectComp != 0:
         if maxConnectComp < connectComp:
             maxConnectComp = connectComp
+
+
 print("가장 큰 연결요소 : ", maxConnectComp)
 print("연결요소 수행시간 = ",time.time()-time0)
+
+
+
 
 
                     
