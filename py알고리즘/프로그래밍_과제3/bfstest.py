@@ -18,7 +18,7 @@
 #     이때 단어 x 자체를 맨 처음 출력하고, 나머지 단어들의 출력 순서는 마음대로 한다.
 #         BFS, 큐의 형태를 이용해서(level order 방식) 해결 가능!
     
-import time
+
 
 
 class wordConnetction:
@@ -32,6 +32,9 @@ class wordConnetction:
     def check(self):
         self.visited = True
         return 1
+    
+    def setDepth(self, level):
+        self.depth = level
 
         
     def addWord(self, linkword):
@@ -131,7 +134,6 @@ with open(path, 'r',encoding='utf-8') as f:
         line = line.split('\t',1)
         word = str(line[0])
         expl = line[1].split()
-        print(expl)
         for w in expl:
             if w in wordDict:
                 wordDict[word].addWord(w)
@@ -186,8 +188,7 @@ def BFS(v: wordConnetction):
             temp=temp.next
     return nodeCount
 
-
-
+import time
 time0 = time.time()
 # beta = wordDict["beta"]
 # beta.check()
@@ -203,6 +204,109 @@ for key ,value in wordDict.items():
 
 print("가장 큰 연결요소 : ", maxConnectComp)
 print("연결요소 수행시간 = ",time.time()-time0)
+# print(wordDict['dior'].countDepth())
+
+# def findDepth(word, k):
+#     start:wordConnetction
+#     start = wordDict[word]
+#     level = 0
+#     queue = deque()
+#     queue.append(start)
+
+#     temp : wordConnetction
+#     nodeWord : wordConnetction
+#     nodePerLevel = 0
+#     while queue:
+#         temp = queue.popleft()
+#         print(temp.word)
+#         level += 1
+#         while(1):
+#             temp.setDepth(level)
+#             nodeWord = wordDict[temp.word]
+#             if nodeWord.depth == -1:
+#                 nodeWord.setDepth(level)
+#                 nodePerLevel += 1
+#                 queue.append(nodeWord.next)
+#             if temp.next == None:
+#                 break
+#             temp = temp.next
+#         level
+
+
+def findDepth(word, k):
+    start = []
+    level = 0
+    wordDict[word].setDepth(level)
+    start.append(wordDict[word])
+    queue = deque()
+    queue.append(start)
+
+    temp : wordConnetction
+    nodeWord : wordConnetction
+    
+    while(level <= k):
+        nodelist = queue.popleft()
+        templist = []
+        for t in nodelist:
+            temp = t
+            print(temp.word, level)
+            while(1):
+                nodeWord = wordDict[temp.word]
+                if nodeWord.depth == -1:
+                    nodeWord.setDepth(level+1)
+                    templist.append(nodeWord)
+                if temp.next == None:
+                    break
+                temp = temp.next
+
+        if templist:
+            queue.append(templist)
+        level+=1
+
+w = "beta"
+findDepth(w, 2)
+
+
+
+
+
+
+# def findDepth(word, k):
+#     start = []
+#     level = 0
+#     wordDict[word].setDepth(level)
+#     start.append(wordDict[word])
+#     queue = deque()
+#     queue.append(start)
+
+#     temp : wordConnetction
+#     nodeWord : wordConnetction
+    
+#     while(level <= k+1):
+#         nodelist = queue.popleft()
+#         for t in nodelist:
+#             templist = []
+#             temp = t
+#             print(temp.word, level)
+#             while(1):
+#                 nodeWord = wordDict[temp.word]
+#                 if nodeWord.depth == -1:
+#                     nodeWord.setDepth(level+1)
+#                     templist.append(nodeWord)
+#                 if temp.next == None:
+#                     break
+#                 temp = temp.next
+#             if templist:
+#                 # print('add templist')
+#                 queue.append(templist)
+#                 for t in templist:
+#                     print(t.word, end=' ')
+#                 print()
+                
+#         level+=1
+
+# w = "beta"
+# findDepth(w, 2)
 
 
 
