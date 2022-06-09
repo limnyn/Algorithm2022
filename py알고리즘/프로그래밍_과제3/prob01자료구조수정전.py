@@ -20,20 +20,9 @@
 #         BFS, 큐의 형태를 이용해서(level order 방식) 해결 가능!
     
 
-class Node:
-    def __init__(self, word):  #data 만 입력시 next 초기값은 None이다.
-        self.word = word #다음 데이터 주소 초기값 = None
-        self.next = None
-        self.visited = False
-
-    def check(self):
-        self.visited = True
-        return 1
-
 
 
 class wordConnetction:
-    #using linklist's head
     def __init__(self, word):
         self.word = word
         self.next = None
@@ -52,7 +41,7 @@ class wordConnetction:
     def addWord(self, linkword):
         if self.find(linkword)==True: # if is already in linked list, skip
             return False
-        newword = Node(linkword)
+        newword = wordConnetction(linkword)
         if self.next == None:
             self.end = newword
             self.next = newword
