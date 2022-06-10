@@ -21,8 +21,8 @@
     
 
 class Node:
-    def __init__(self, word):  #data 만 입력시 next 초기값은 None이다.
-        self.word = word #다음 데이터 주소 초기값 = None
+    def __init__(self, word):
+        self.word = word
         self.next = None
         self.visited = False
 
