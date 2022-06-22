@@ -32,7 +32,7 @@ with open(path, 'r',encoding='utf-8') as f:
             sumlist[indexlist[startNum]] += weight
 
         
-# print(max(sumlist))
+print(max(sumlist))
 print(sumlist)
 print(indexlist)
 
